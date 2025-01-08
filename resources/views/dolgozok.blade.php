@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="kepek/icon.png">
 
-    <title>Comproller - Rólunk</title>
+    <title>Comproller - Irányitópul</title>
 
     <style>
 
@@ -31,13 +31,26 @@
         #fel
         {
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            width: 20%;
-            padding: 20px;
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, transform 0.3s ease;
 
+        }
+
+        #fel:hover 
+        {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        #fel img 
+        {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         #nav_logo
@@ -63,13 +76,24 @@
 
         body
         {
-
-            background-image: url("kepek/hatterek/hatter.jpg");
-            background-repeat: no-repeat;
-            background-color: grey;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            min-height: 100vh;
+            position: relative;
             font-family: arial;
             color: red;
+        }
 
+        body::before
+        {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('kepek/hatterek/hatter.jpg') center/cover no-repeat fixed;
+            z-index: -1;
         }
 
         img
@@ -95,6 +119,8 @@
 
             display: grid;
             place-items: center;
+            padding-bottom: 80px;
+            margin-bottom: 20px;
 
         }
 
@@ -109,27 +135,82 @@
             justify-items: left;
             align-items: left;
             gap: 5px;
+            margin-bottom: 30px;
 
         }
 
-        nav,#footer
+        #footer
         {
 
-            background-color: rgba(255, 255, 255, 0.623);
-            border-radius: 10px;
-            font-size: 13px;
-            padding: 10px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
 
         }
 
-        nav
-        {
 
+        #footer a 
+        {
+            color: white;
+            text-decoration: none;
+            padding: 0 15px;
+            font-family: 'Arial', sans-serif;
+            font-size: 15px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        #footer a:hover 
+        {
+            color: #3498db;
+        }
+
+        #footer a::after 
+        {
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #3498db;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        #footer a:hover::after 
+        {
+            width: 70%;
+        }
+
+        nav 
+        {
             width: 90%;
-            display:flex;
+            display: flex;
             justify-content: space-between;
             text-align: center;
+            background-color: rgba(255, 255, 255, 0.623);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
 
+        nav a 
+        {
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+        }
+
+        nav a:hover 
+        {
+            color: #007bff;
+            background-color:rgba(0, 123, 255, 0.11);
+            border-radius: 3px;
         }
 
         table
@@ -142,23 +223,31 @@
         #jdatum,#jido
         {
 
-            background-color:rgba(182, 208, 226, 0.47);
-            border-radius: 40px;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.2rem;
+            color: #2c3e50;
+
+        }
+
+        #jdatum
+        {
+
+            font-weight: bold;
+            margin-bottom: 5px;
 
         }
 
         #datumok
         {
 
-            background-image: url("kepek/datum.PNG");
-            width: 40%;
-            height: 60%;
             text-align: center;
-            color: black;
-            border-radius: 10px;
-            font-size: 30px;
-            padding: 30px;
-            border: 2px solid black;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
         }
 
@@ -173,6 +262,154 @@
             cursor: pointer;
             padding: 15px;
 
+        }
+
+        #a_tablazat
+        {
+
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
+        }
+
+        table
+        {
+
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+
+        }
+
+        thead 
+        {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        td 
+        {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tbody tr:nth-child(even) 
+        {
+            background-color: #f5f6f7;
+        }
+
+        #lg_menu
+        {
+            position: relative;
+            width: 300px;
+            margin: 20px;
+        }
+
+        #lg_kivalasztas
+        {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #2c3e50;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.623);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #lg_kivalasztas:hover 
+        {
+            border-color: #3498db;
+        }
+
+        #mezo_div
+        {
+            position: relative;
+            width: 300px;
+            margin: 20px;
+        }
+
+        #lg_mezo
+        {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #2c3e50;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        #lg_mezo:focus
+        {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+        }
+
+        #mezo_cimke
+        {
+            position: absolute;
+            left: 12px;
+            top: -10px;
+            background-color: white;
+            padding: 0 5px;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        #gombok
+        {
+            display: flex;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        #gomb
+        {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #hgomb
+        {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        #hgomb:hover 
+        {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        #tgomb
+        {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        #tgomb:hover 
+        {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        #management_form
+        {
+            background-color:rgba(255, 255, 255, 0.623);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+            margin: 0 auto;
         }
 
     </style>
@@ -193,65 +430,102 @@
             <a><img src="kepek/nav_iconok/felhasznalo.PNG" id="jprofil"><br></a>
         </nav>
 
-        <p>---</p>
-
         <div id="leiras">
 
                 <h2>Jelenlegi dolgozóink adatai:</h2>
                 <p>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Dolgozó ID</th>
-                                <th>Név</th>
-                                <th>Email</th>
-                                <th>Telefonszám</th>
-                                <th>Munkakör</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($dolgozok as $dolgozo)
+                    <div id="a_tablazat">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Dolgozó ID</th>
+                                        <th>Név</th>
+                                        <th>Email</th>
+                                        <th>Telefonszám</th>
+                                        <th>Munkakör</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($dolgozok as $dolgozo)
+                                        <tr>
+                                            <td>{{ $dolgozo->DolgozoID }}</td>
+                                            <td>{{ $dolgozo->Nev }}</td>
+                                            <td>{{ $dolgozo->Email }}</td>
+                                            <td>{{ $dolgozo->Telefonszam }}</td>
+                                            <td>{{ $dolgozo->Munkakor }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <th>Cím</th>
+                                        <th>Születési Dátum</th>
+                                        <th>Bankszámlaszám</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($dolgozokreszletek as $dolgozo)
+                                        <tr>
+                                            <td>{{ $dolgozo->Cim }}</td>
+                                            <td>{{ $dolgozo->SzuletesiDatum }}</td>
+                                            <td>{{ $dolgozo->Bankszamlaszam }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                        </p>
+
+                        <h2>Céges adatok:</h2>
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>{{ $dolgozo->DolgozoID }}</td>
-                                    <td>{{ $dolgozo->Nev }}</td>
-                                    <td>{{ $dolgozo->Email }}</td>
-                                    <td>{{ $dolgozo->Telefonszam }}</td>
-                                    <td>{{ $dolgozo->Munkakor }}</td>
+                                    <th>Kategória</th>
+                                    <th>Érték</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-                </p>
-
-                <h2>Céges adatok:</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Kategória</th>
-                            <th>Érték</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Dolgozók száma</td>
-                            <td>{{ $dolgozok->count() }}</td>
-                        </tr>
-                        <tr>
-                            <td>Havi cégkereslet</td>
-                            <td>1,200,000 HUF</td>
-                        </tr>
-                        <tr>
-                            <td>EUR-HUF valutaárfolyam</td>
-                            <td>387.45 HUF</td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Dolgozók száma</td>
+                                    <td>{{ $dolgozok->count() }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Havi cégkereslet</td>
+                                    <td>1,200,000 HUF</td>
+                                </tr>
+                                <tr>
+                                    <td>EUR-HUF valutaárfolyam</td>
+                                    <td>387.45 HUF</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
         </div>
 
-        <p>---</p>
+        <div id="management_form">
+
+            <div id="lg_menu">
+                <select id="lg_kivalasztas">
+                    <option value="" disabled selected>Válassz dolgozót</option>
+                    <option value="1">Kiss János</option>
+                    <option value="2">Nagy Péter</option>
+                    <option value="3">Kovács Anna</option>
+                </select>
+            </div>
+
+            <div id="mezo_div">
+                <label id="mezo_cimke">Új dolgozó neve</label>
+                <input type="text" id="lg_mezo" placeholder="Írd be a dolgozó nevét">
+            </div>
+
+            <div id="gombok">
+                <button id="gomb" class="hgomb">Hozzáadás</button>
+                <button id="gomb" class="tgomb">Törlés</button>
+            </div>
+
+        </div>
 
         <div id="datumok">
 
