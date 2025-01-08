@@ -16,3 +16,15 @@ class Dolgozo extends Model
     public $timestamps = false;
 
 }
+
+class DolgozokReszlet extends Model
+{
+    
+    use HasFactory;
+
+    protected $table = 'dolgozokreszletek';
+    protected $primaryKey = 'ReszletID';
+    protected $fillable = ['Cim', 'SzuletesiDatum', 'Bankszamlaszam'];
+    public $timestamps = false;
+
+}
