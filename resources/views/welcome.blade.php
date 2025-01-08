@@ -37,7 +37,7 @@
             width: 100px;
             height: 100px;
             border-radius: 60px;
-            cursor: none;
+            cursor: pointer;
 
         }
 
@@ -48,7 +48,7 @@
             width: 100px;
             height: 100px;
             border-radius: 60px;
-            cursor: none;
+            cursor: default;
 
         }
 
@@ -87,7 +87,7 @@
         img:hover
         {
 
-            transform: scale(1.05);            
+            transform: scale(1.01);            
 
         }
 
@@ -109,8 +109,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: none;
+            cursor: default;
+            animation: kepanimacio 2s infinite alternate ease-in-out;
 
+        }
+
+        @keyframes kepanimacio
+        {
+            from 
+            {
+                transform: translateX(-5%);
+            }
+            to 
+            {
+                transform: translateX(0%);
+            }
+            to 
+            {
+                transform: translateX(5%);
+            }
         }
 
         #leiras,nav,#footer
@@ -191,13 +208,20 @@
         button
         {
 
-            background-color: black;
+            background-color: white;
             border-radius: 30px;
             opacity: 0.7;
-            color: white;
+            color: black;
             font-size: 20px;
             cursor: pointer;
-            padding: 15px;
+            transition: transform 1.1;
+
+        }
+
+        button:hover
+        {
+
+            transform: scale(1.02);            
 
         }
 
@@ -237,11 +261,11 @@
 
         <div>
 
-            <button type="button" onclick="elvesz()">Előző</button>
+            <button type="button" onclick="elvesz()"><</button>
 
                 <img src="kepek/emberek/1.PNG" id="epuletid">
 
-            <button type="button" onclick="hozzaad()">Következő</button>
+            <button type="button" onclick="hozzaad()">></button>
 
         </div>
 
