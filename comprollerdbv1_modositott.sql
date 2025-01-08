@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2024 at 05:38 PM
+-- Generation Time: Jan 08, 2025 at 08:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -72,6 +72,15 @@ CREATE TABLE `dolgozokreszletek` (
   `BankszamlaSzam` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `dolgozokreszletek`
+--
+
+INSERT INTO `dolgozokreszletek` (`ReszletID`, `DolgozoID`, `Cim`, `SzuletesiDatum`, `BankszamlaSzam`) VALUES
+(1, 1, 'teszcím 1', '1995-01-01', '11111111-11111111-11'),
+(2, 2, 'teszcím 2', '2025-01-01', '11111111-11111111-12'),
+(3, 3, 'tesztcím 3', '2024-01-01', '11111111-11111111-13');
+
 -- --------------------------------------------------------
 
 --
@@ -137,10 +146,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('7ctkjI8AtTvvyodyLKgfrEmxNUzxP8SwIPBrDgrv', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZzR0OHllNmlkb2lTc05mNG1INjc0Q2dvNGdOOWVnd1FMc2xVV2RqayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1735059717),
-('ONl8WHqZl0ROp8Kre1FIuRahDWFUoCwdpSop4Uc3', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTWRVeHRhQzNsY1l1TDFtR1Flc0Z3dzRYTG1xbnNSV0RSMnVvVVFUWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9kb2xnb3pvayI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1735231082),
-('Q7PJ5OrpJFfJXBYfjR96WK9dI3y1xeLp4F2OWpf1', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOGZva0tUUnF0SkVsdUYzOVBmRFJFU1U1RzM5T1pWaEYwazFMMzk4UyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1735040255),
-('WDUwjiOmiYfKVsuZe5fkl6R0AaYZ990xM0DsRVuu', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRnJkM3YwbFZha1lIajRXUnBmS2FBYXRlVThEc01mWUZKWmY1ZUlsaiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTY6Imh0dHA6Ly9sb2NhbGhvc3QiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1732810043);
+('yrL7DtTyou9lvKgcPe8OZuRtqTWEasAlLQHQMiY7', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTEZmVEZaY1VVektnNkc3b1JoaVRXUms5ZHNzd2Fqa2diRnNmb0NGUCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9kb2xnb3pvayI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736364435);
 
 --
 -- Indexes for dumped tables
@@ -216,7 +222,7 @@ ALTER TABLE `dolgozok`
 -- AUTO_INCREMENT for table `dolgozokreszletek`
 --
 ALTER TABLE `dolgozokreszletek`
-  MODIFY `ReszletID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ReszletID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `dolgozok_muszakok`
