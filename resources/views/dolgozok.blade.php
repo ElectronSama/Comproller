@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="kepek/icon.png">
 
-    <title>Comproller - Irányitópul</title>
+    <title>Comproller - Irányitópult</title>
 
     <style>
 
@@ -110,7 +110,7 @@
         img:hover
         {
 
-            transform: scale(1.05);            
+            transform: scale(1.01);         
 
         }
 
@@ -426,7 +426,7 @@
             <a href="{{ url('/kapcsolat') }}"> <img src="kepek/nav_iconok/telefon.png" id="nav_icon"><br>Kapcsolat</a> 
             <a href="{{ url('/profil') }}"> <img src="kepek/nav_iconok/profil.png" id="nav_icon"><br>Profil</a> 
             <a href="{{ url('/rolunk') }}"> <img src="kepek/nav_iconok/rolunk.png" id="nav_icon"><br>Rólunk</a> 
-            <a href="{{ url('/dolgozok') }}"> <img src="kepek/nav_iconok/dolgozok.png" id="nav_icon"><br>Dolgozók</a>
+            <a href="{{ url('/dolgozok') }}"> <img src="kepek/nav_iconok/dolgozok.png" id="nav_icon"><br>Irányitópult</a>
             <a><img src="kepek/nav_iconok/felhasznalo.PNG" id="jprofil"><br></a>
         </nav>
 

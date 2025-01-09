@@ -17,6 +17,55 @@
 
         }
 
+        #footer
+        {
+
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+
+        }
+
+        #footer a 
+        {
+            color: white;
+            text-decoration: none;
+            padding: 0 15px;
+            font-family: 'Arial', sans-serif;
+            font-size: 15px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        #footer a:hover 
+        {
+            color: #3498db;
+        }
+
+        #footer a::after 
+        {
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #3498db;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        #footer a:hover::after 
+        {
+            width: 70%;
+        }
+
+
         #jprofil
         {
 
@@ -31,13 +80,26 @@
         #fel
         {
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            width: 20%;
-            padding: 20px;
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, transform 0.3s ease;
 
+        }
+
+        #fel:hover 
+        {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        #fel img 
+        {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         #nav_logo
@@ -63,13 +125,24 @@
 
         body
         {
-
-            background-image: url("kepek/hatterek/hatter.jpg");
-            background-repeat: no-repeat;
-            background-color: grey;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            min-height: 100vh;
+            position: relative;
             font-family: arial;
-            color: #36454F;
+            color: red;
+        }
 
+        body::before
+        {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('kepek/hatterek/hatter.jpg') center/cover no-repeat fixed;
+            z-index: -1;
         }
 
         img
@@ -86,7 +159,7 @@
         img:hover
         {
 
-            transform: scale(1.05);            
+            transform: scale(1.01);           
 
         }
 
@@ -95,6 +168,8 @@
 
             display: grid;
             place-items: center;
+            padding-bottom: 80px;
+            margin-bottom: 20px;
 
         }
 
@@ -112,24 +187,29 @@
 
         }
 
-        nav,#footer
+        nav 
         {
-
-            background-color: rgba(255, 255, 255, 0.623);
-            border-radius: 10px;
-            font-size: 13px;
-            padding: 10px;
-
-        }
-
-        nav
-        {
-
             width: 90%;
-            display:flex;
+            display: flex;
             justify-content: space-between;
             text-align: center;
+            background-color: rgba(255, 255, 255, 0.623);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
 
+        nav a 
+        {
+            text-decoration: none;
+            color: #333;
+                    padding: 10px;
+        }
+
+        nav a:hover 
+        {
+            color: #007bff;
+            background-color:rgba(0, 123, 255, 0.11);
+            border-radius: 3px;
         }
 
         table
@@ -142,36 +222,51 @@
         #jdatum,#jido
         {
 
-            background-color:rgba(182, 208, 226, 0.47);
-            border-radius: 40px;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            font-size: 19.2px;
+            color: #2c3e50;
+
+        }
+
+        #jdatum
+        {
+
+            font-weight: bold;
+            margin-bottom: 5px;
 
         }
 
         #datumok
         {
 
-            background-image: url("kepek/datum.PNG");
-            width: 40%;
-            height: 60%;
             text-align: center;
-            color: black;
-            border-radius: 10px;
-            font-size: 30px;
-            padding: 30px;
-            border: 2px solid black;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
         }
 
         button
         {
 
-            background-color: black;
+            background-color: white;
             border-radius: 30px;
-            opacity: 0.5;
-            color: white;
+            opacity: 0.7;
+            color: black;
             font-size: 20px;
             cursor: pointer;
-            padding: 15px;
+            transition: transform 1.1;
+
+        }
+
+        button:hover
+        {
+
+            transform: scale(1.02);            
 
         }
 
@@ -189,11 +284,9 @@
             <a href="{{ url('/kapcsolat') }}"> <img src="kepek/nav_iconok/telefon.png" id="nav_icon"><br>Kapcsolat</a> 
             <a href="{{ url('/profil') }}"> <img src="kepek/nav_iconok/profil.png" id="nav_icon"><br>Profil</a> 
             <a href="{{ url('/rolunk') }}"> <img src="kepek/nav_iconok/rolunk.png" id="nav_icon"><br>Rólunk</a> 
-            <a href="{{ url('/dolgozok') }}"> <img src="kepek/nav_iconok/dolgozok.png" id="nav_icon"><br>Dolgozók</a>
+            <a href="{{ url('/dolgozok') }}"> <img src="kepek/nav_iconok/dolgozok.png" id="nav_icon"><br>Irányitópult</a>
             <a><img src="kepek/nav_iconok/felhasznalo.PNG" id="jprofil"><br></a>
         </nav>
-
-        <p>---</p>
 
         <div id="leiras">
 
@@ -216,8 +309,6 @@
             </p>
 
         </div>
-
-        <p>---</p>
 
         <div id="datumok">
 
