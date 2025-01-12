@@ -25,9 +25,12 @@
     </button>
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
       <ul class="navbar-nav">
+        @guest
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/">Kezdőlap</a>
         </li>
+        @endguest
+        @auth
         <li class="nav-item">
           <a class="nav-link" href="/dashboard">Irányítópult</a>
         </li>
@@ -43,15 +46,20 @@
         <li class="nav-item">
           <a class="nav-link" href="/payroll-calculation">Bérszámfejtés</a>
         </li>
+        @endauth
+        @guest
         <li class="nav-item">
           <a class="nav-link" href="/contact">Kapcsolat</a>
         </li>
+        @endguest
+        @auth
         <li class="nav-item">
           <a class="nav-link" href="/profile">Profil</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Kijelentkezés</a>
         </li>
+        @endauth
       </ul>
     </div>
   </div>
