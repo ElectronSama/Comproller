@@ -4,17 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="kepek/icon.png">
     <title>Comproller - Főoldal</title>
-</head>
-<body>
-    @include('navbarandfooter/nav')
-    <!DOCTYPE html>
-<html lang="hu">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="kepek/icon.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Comproller - Főoldal</title>
-    <style>
+        <style>
         * {
             margin: 0;
             padding: 0;
@@ -168,7 +158,6 @@
             </form>
         </div>
     </div>
-    @include('navbarandfooter/footer')
     <script>
         let megnyomva = false;
         function megnez(passwordId, iconElement) {
@@ -184,10 +173,6 @@
             }
         }
     </script>
-</body>
-</html>
-
-
     @include('navbarandfooter/footer')
 </body>
 </html>
