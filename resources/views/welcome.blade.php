@@ -29,15 +29,13 @@
             border-bottom: #9d94ff 10px solid;
         }
 
-        /* A dropdown gomb bal oldalon történő elhelyezése mobil és tablet nézetekben */
         .navbar-nav {
             margin-left: 0;
         }
 
-        /* Dropdown button alignment on mobile */
         @media (max-width: 768px) {
             .navbar .nav-item {
-                margin-left: 0; /* Align to the left */
+                margin-left: 0;
             }
         }
 
