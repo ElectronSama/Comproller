@@ -41,15 +41,15 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex align-items-center">
                                     <strong class="me-2">Facebook:</strong>
-                                    <a href="https://facebook.com/comproller" class="text-decoration-none">facebook.com/pumpkinstudio</a>
+                                    <a href="https://facebook.com/pumpkinstudio" class="text-decoration-none">facebook.com/pumpkinstudio</a>
                                 </li>
                                 <li class="list-group-item d-flex align-items-center">
                                     <strong class="me-2">Instagram:</strong>
-                                    <a href="https://instagram.com/comproller" class="text-decoration-none">instagram.com/pumpkinstudio</a>
+                                    <a href="https://instagram.com/pumpkinstudio" class="text-decoration-none">instagram.com/pumpkinstudio</a>
                                 </li>
                                 <li class="list-group-item d-flex align-items-center">
                                     <strong class="me-2">GitHub:</strong>
-                                    <a href="https://github.com/comproller" class="text-decoration-none">github.com/ElectronSama/comproller</a>
+                                    <a href="https://github.com/ElectronSama/comproller" class="text-decoration-none">github.com/ElectronSama/comproller</a>
                                 </li>
                                 <li class="list-group-item d-flex align-items-center">
                                     <strong class="me-2">Email:</strong>
