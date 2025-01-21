@@ -13,7 +13,7 @@
         }
 
         body {
-            background-image: url('{{ asset('kepek/hatter.jpg') }}');
+            background-image: url('{{ asset('kepek/vszellem.png') }}');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -111,7 +111,6 @@
 
         button {
             position: relative;
-            width: 100%;
             height: 40px;
             font-size: 16px;
             color: black;
