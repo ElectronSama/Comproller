@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <title>Irányítópult - Comproller</title>
     <style>
         .iranyitopult_tarolo
@@ -159,96 +160,67 @@
     <div class="iranyitopult_tarolo">
         <div class="kartyak_tarolo">
             <div class="kartya">
-                <div class="kartya_cim">Aktív Projektek</div>
-                <div class="kartya_ertek">24</div>
-                <div class="kartya_leiras">4 új az elmúlt héten</div>
+                <div class="kartya_cim">Aktív</div>
+                <div class="kartya_ertek"></div>
+                <div class="kartya_leiras"></div>
             </div>
             <div class="kartya">
-                <div class="kartya_cim">Dolgozók</div>
-                <div class="kartya_ertek">156</div>
-                <div class="kartya_leiras">12 távoli munkavégző</div>
+                <div class="kartya_cim">Szabadság</div>
+                <div class="kartya_ertek"></div>
+                <div class="kartya_leiras"></div>
             </div>
             <div class="kartya">
-                <div class="kartya_cim">Havi Bevétel</div>
-                <div class="kartya_ertek">12.4M Ft</div>
-                <div class="kartya_leiras">+8% az előző hónaphoz képest</div>
-            </div>
-            <div class="kartya">
-                <div class="kartya_cim">Teljesítmény</div>
-                <div class="kartya_ertek">92%</div>
-                <div class="kartya_leiras">Határidők betartása</div>
+                <div class="kartya_cim">Összes</div>
+                <div class="kartya_ertek"></div>
+                <div class="kartya_leiras"></div>
             </div>
         </div>
-
+        
         <div class="diagram_tarolo">
-            <div class="diagram">
-                <div class="diagram_cim">Aktuális Projektek</div>
-                <table class="tablazat">
-                    <thead>
-                        <tr>
-                            <th>Projekt Név</th>
-                            <th>Állapot</th>
-                            <th>Határidő</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="Projekt Név">Weboldal Fejlesztés</td>
-                            <td data-label="Állapot">
-                                <span class="allapot_jelzo allapot_aktiv"></span>Aktív
-                            </td>
-                            <td data-label="Határidő">2024.02.15</td>
-                        </tr>
-                        <tr>
-                            <td data-label="Projekt Név">Mobil Alkalmazás</td>
-                            <td data-label="Állapot">
-                                <span class="allapot_jelzo allapot_fuggyben"></span>Függőben
-                            </td>
-                            <td data-label="Határidő">2024.03.01</td>
-                        </tr>
-                        <tr>
-                            <td data-label="Projekt Név">Adatbázis Migráció</td>
-                            <td data-label="Állapot">
-                                <span class="allapot_jelzo allapot_lezart"></span>Lezárt
-                            </td>
-                            <td data-label="Határidő">2024.01.30</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
             <div class="diagram">
                 <div class="diagram_cim">Legutóbbi Események</div>
                 <table class="tablazat">
                     <thead>
                         <tr>
                             <th>Esemény</th>
-                            <th>Részleg</th>
+                            <th>Leírás</th>
                             <th>Időpont</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="diagram">
+                <div class="diagram_cim">Utóljára felvitt munkavállalók</div>
+                <table class="tablazat">
+                    <thead>
                         <tr>
-                            <td data-label="Esemény">Új Szerződés Aláírva</td>
-                            <td data-label="Részleg">Értékesítés</td>
-                            <td data-label="Időpont">Ma, 10:30</td>
+                            <th>ID</th>
+                            <th>Név</th>
+                            <th>Műszak</th>
+                            <th></th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <tr>
-                            <td data-label="Esemény">Rendszer Frissítés</td>
-                            <td data-label="Részleg">IT</td>
-                            <td data-label="Időpont">Tegnap, 15:45</td>
-                        </tr>
-                        <tr>
-                            <td data-label="Esemény">Képzés Befejezve</td>
-                            <td data-label="Részleg">HR</td>
-                            <td data-label="Időpont">2024.01.15</td>
+                            <td data-label="ID">1</td>
+                            <td data-label="Név">John Doe</td>
+                            <td data-label="Műszak">Délután</td>
+                            <td data-label="Műszak">
+                                <button class="btn btn-info">
+                                    <i class="bi bi-info-circle"></i> 
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
     @include('navbarandfooter/footer')
 </body>
 </html>

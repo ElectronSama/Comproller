@@ -155,6 +155,10 @@
 <body>
     @include('navbarandfooter/nav')
     
+    <div>
+        
+    </div>
+
     <div id="kozepre">
         <h1>Jelenlegi események a cégnél:</h1>
 
