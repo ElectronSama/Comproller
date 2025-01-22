@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Jan 15. 08:59
--- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Jan 22, 2025 at 08:58 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatbázis: `comproller`
+-- Database: `comproller`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `beosztasok`
+-- Table structure for table `beosztasok`
 --
 
 CREATE TABLE `beosztasok` (
@@ -38,7 +38,7 @@ CREATE TABLE `beosztasok` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `berek`
+-- Table structure for table `berek`
 --
 
 CREATE TABLE `berek` (
@@ -52,7 +52,7 @@ CREATE TABLE `berek` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `bermodositas`
+-- Table structure for table `bermodositas`
 --
 
 CREATE TABLE `bermodositas` (
@@ -67,7 +67,19 @@ CREATE TABLE `bermodositas` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `esemenyek`
+-- Table structure for table `dolgozok`
+--
+
+CREATE TABLE `dolgozok` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `esemenyek`
 --
 
 CREATE TABLE `esemenyek` (
@@ -80,7 +92,7 @@ CREATE TABLE `esemenyek` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `felhasznalok`
+-- Table structure for table `felhasznalok`
 --
 
 CREATE TABLE `felhasznalok` (
@@ -93,17 +105,18 @@ CREATE TABLE `felhasznalok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- A tábla adatainak kiíratása `felhasznalok`
+-- Dumping data for table `felhasznalok`
 --
 
 INSERT INTO `felhasznalok` (`id`, `felhasznalonev`, `jelszo`, `szerep`, `created_at`, `updated_at`) VALUES
 (1, 'nikecareer', '123456', 'hr', NULL, NULL),
-(2, 'shellpath', '123456', 'pu', NULL, NULL);
+(2, 'shellpath', '654321', 'pu', NULL, NULL),
+(5, 'viola123', 'admin123', 'admin', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -113,7 +126,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- A tábla adatainak kiíratása `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -124,12 +137,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2025_01_15_074821_create_berek_table', 4),
 (10, '2025_01_15_074853_create_beosztasok_table', 4),
 (11, '2025_01_15_074916_create_bermodositas_table', 4),
-(12, '2025_01_15_074952_create_muszakok_table', 4);
+(12, '2025_01_15_074952_create_muszakok_table', 4),
+(13, '2025_01_17_152214_create_dolgozok_table', 5);
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `muszakok`
+-- Table structure for table `muszakok`
 --
 
 CREATE TABLE `muszakok` (
@@ -143,7 +157,7 @@ CREATE TABLE `muszakok` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `nyilvantartas`
+-- Table structure for table `nyilvantartas`
 --
 
 CREATE TABLE `nyilvantartas` (
@@ -167,7 +181,7 @@ CREATE TABLE `nyilvantartas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- A tábla adatainak kiíratása `nyilvantartas`
+-- Dumping data for table `nyilvantartas`
 --
 
 INSERT INTO `nyilvantartas` (`DolgozoID`, `Keresztnev`, `Vezeteknev`, `Szuletesi_datum`, `Anyja_neve`, `Tajszam`, `Adoszam`, `Bankszamlaszam`, `Cim`, `Allampolgarsag`, `Tartozkodasi_hely`, `Szemelyigazolvany_szam`, `Email`, `Telefonszam`, `Munkakor`, `created_at`, `updated_at`) VALUES
@@ -177,7 +191,7 @@ INSERT INTO `nyilvantartas` (`DolgozoID`, `Keresztnev`, `Vezeteknev`, `Szuletesi
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `sessions`
+-- Table structure for table `sessions`
 --
 
 CREATE TABLE `sessions` (
@@ -190,43 +204,48 @@ CREATE TABLE `sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- A tábla adatainak kiíratása `sessions`
+-- Dumping data for table `sessions`
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('IK1AAKtI1dfHadvdicXU4yv73A5b5ph3SnKQ9JKZ', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicFVvTWVIU04zODRBaHFqNHhHclVIQWptNnJjSzdURGp6d2RsSVhxdyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTY6Imh0dHA6Ly9sb2NhbGhvc3QiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1736678228),
-('Y29UHKeadrZNUxHDZVt1xNfOQchMpC5RHuolNiJL', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRjl5eW1ocFF1SURKTHhyUWlOMHJMaThUbEU5MExaT1NOeUpqOEY3ZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9ldmVudHMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1736926770);
+('PxAucJeLlYqpAeD41mQ3APYnC4Alepf9cofGq47S', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0', 'YTozOntzOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjY6Il90b2tlbiI7czo0MDoiNWg3ZFM4dzkwaXFTNHZlZEc0b2lJMm5EMFM4Z1ExYVM5Vk54NVlCRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fX0=', 1737575548);
 
 --
--- Indexek a kiírt táblákhoz
+-- Indexes for dumped tables
 --
 
 --
--- A tábla indexei `beosztasok`
+-- Indexes for table `beosztasok`
 --
 ALTER TABLE `beosztasok`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `berek`
+-- Indexes for table `berek`
 --
 ALTER TABLE `berek`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `bermodositas`
+-- Indexes for table `bermodositas`
 --
 ALTER TABLE `bermodositas`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `esemenyek`
+-- Indexes for table `dolgozok`
+--
+ALTER TABLE `dolgozok`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `esemenyek`
 --
 ALTER TABLE `esemenyek`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `felhasznalok`
+-- Indexes for table `felhasznalok`
 --
 ALTER TABLE `felhasznalok`
   ADD PRIMARY KEY (`id`),
@@ -234,25 +253,25 @@ ALTER TABLE `felhasznalok`
   ADD UNIQUE KEY `felhasznalok_szerep_unique` (`szerep`);
 
 --
--- A tábla indexei `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `muszakok`
+-- Indexes for table `muszakok`
 --
 ALTER TABLE `muszakok`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `nyilvantartas`
+-- Indexes for table `nyilvantartas`
 --
 ALTER TABLE `nyilvantartas`
   ADD PRIMARY KEY (`DolgozoID`);
 
 --
--- A tábla indexei `sessions`
+-- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
@@ -260,53 +279,59 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
--- A kiírt táblák AUTO_INCREMENT értéke
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT a táblához `beosztasok`
+-- AUTO_INCREMENT for table `beosztasok`
 --
 ALTER TABLE `beosztasok`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT a táblához `berek`
+-- AUTO_INCREMENT for table `berek`
 --
 ALTER TABLE `berek`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT a táblához `bermodositas`
+-- AUTO_INCREMENT for table `bermodositas`
 --
 ALTER TABLE `bermodositas`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT a táblához `esemenyek`
+-- AUTO_INCREMENT for table `dolgozok`
+--
+ALTER TABLE `dolgozok`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `esemenyek`
 --
 ALTER TABLE `esemenyek`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT a táblához `felhasznalok`
+-- AUTO_INCREMENT for table `felhasznalok`
 --
 ALTER TABLE `felhasznalok`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT a táblához `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT a táblához `muszakok`
+-- AUTO_INCREMENT for table `muszakok`
 --
 ALTER TABLE `muszakok`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT a táblához `nyilvantartas`
+-- AUTO_INCREMENT for table `nyilvantartas`
 --
 ALTER TABLE `nyilvantartas`
   MODIFY `DolgozoID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;

@@ -1,4 +1,5 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -34,7 +35,7 @@
               <a class="nav-link" aria-current="page" href="/">Kezdőlap</a>
             </li>
             @endguest
-            @auth
+            @if(session('isAdmin'))
             <li class="nav-item">
               <a class="nav-link" href="/dashboard">Irányítópult</a>
             </li>
@@ -50,20 +51,20 @@
             <li class="nav-item">
               <a class="nav-link" href="/payroll-calculation">Bérszámfejtés</a>
             </li>
-            @endauth
+            @endif
             @guest
             <li class="nav-item">
               <a class="nav-link" href="/contact">Kapcsolat</a>
             </li>
             @endguest
-            @auth
+            @if(session('isAdmin'))
             <li class="nav-item">
               <a class="nav-link" href="/profile">Profil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Kijelentkezés</a>
+              <a class="nav-link" href="#" onclick="logout()">Kijelentkezés</a>
             </li>
-            @endauth
+            @endif
           </ul>
         </div>
       </div>
@@ -72,3 +73,24 @@
     </div>
   </div>
 </nav>
+<script>
+  function logout() 
+  {
+      fetch('{{ route('logout') }}', 
+      {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+          }
+      }).then(response => {
+          if (response.ok) {
+              window.location.href = '/';
+          } else {
+              alert('Kijelentkezési hiba!');
+          }
+      }).catch(error => {
+          console.error('Hiba a kijelentkezés során:', error);
+      });
+  }
+</script>

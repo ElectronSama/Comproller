@@ -111,6 +111,7 @@
 
         button {
             position: relative;
+            width: 100%;
             height: 40px;
             font-size: 16px;
             color: black;
@@ -138,6 +139,21 @@
 </head>
 <body>
     @include('navbarandfooter/nav')
+
+    <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "comproller";
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        if ($conn->connect_error) 
+        {
+            die("Kapcsolódási hiba: " . $conn->connect_error);
+        }
+    ?>
+
     <div class="wrapper">
         <div class="form-wrapper sign-in">
             <form action="">
@@ -151,11 +167,40 @@
                     <label>Jelszó</label>
                     <img src="{{ asset('kepek/szem_be.png') }}" onclick="megnez('password-signin', this)" class="jelszo-icon">
                 </div>
-                <button type="submit">Bejelentkezés</button>
+                <button type="button" onclick="bejelentkezes()">Bejelentkezés</button>
             </form>
         </div>
     </div>
+
+    <?php
+
+        $sql = "SELECT felhasznalonev, jelszo, szerep FROM felhasznalok";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) 
+        {
+            $data = [];
+            while($row = $result->fetch_assoc()) 
+            {
+                $data[] = [
+                    'felhasznalonev' => $row["felhasznalonev"],
+                    'jelszo' => $row["jelszo"],
+                    'szerep' => $row["szerep"]
+                ];
+            }
+        } 
+        else 
+        {
+            $data = [];
+        }
+
+        $conn->close();
+    
+    ?>
+
+
     <script>
+
         let megnyomva = false;
         function megnez(passwordId, iconElement) {
             const passwordField = document.getElementById(passwordId);
@@ -169,7 +214,101 @@
             megnyomva = false;
             }
         }
+
+        function bejelentkezes() 
+        {
+
+            let felhasznalok = [];
+            let jelszavak = [];
+            let szerepek = [];
+
+            var data = <?php echo json_encode($data); ?>;
+            data.forEach(function(user) 
+            {
+                felhasznalok.push(user.felhasznalonev);
+                jelszavak.push(user.jelszo);
+                szerepek.push(user.szerep);
+            });
+
+            let felhasznalonev = document.getElementById("b_nev").value;
+            let jelszo = document.getElementById("password-signin").value;
+
+            let ervenyes = false;
+            let admin = false;
+
+            for (let i = 0; i < felhasznalok.length; i++)
+            {
+
+                if (felhasznalok[i] == felhasznalonev && jelszavak[i] == jelszo)
+                {
+
+                    ervenyes = true;
+
+                    if (szerepek[i] == "hr" || szerepek[i] == "pu" || szerepek[i] == "admin")
+                    {
+
+                        admin = true;
+                        
+                    }
+                    
+                }
+                else
+                {
+
+                    continue;
+
+                }
+
+            }
+
+            if (ervenyes == true)
+            {
+
+                    if (admin == true)
+                    {                   
+
+                        if (admin == true) 
+                        {
+                            fetch('/api/set-admin-session', 
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                                },
+                                body: JSON.stringify({ admin: true })
+                            })
+                            .then(response => 
+                            {
+                                if (response.ok) 
+                                {
+                                    window.location.reload();
+                                } 
+                                else 
+                                {
+                                    alert("Hiba történt a jogosultság frissítése közben.");
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Hiba:', error);
+                            });
+                        }
+
+                    }
+                
+            }
+            else
+            {
+
+                alert("Érvénytelen adatok!");
+
+            }
+
+        }
+
+
     </script>
+
     @include('navbarandfooter/footer')
 </body>
 </html>
