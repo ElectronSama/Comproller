@@ -42,3 +42,9 @@ Köszönjük, hogy használja a Comproller alkalmazást! A fejlesztésekkel kapc
 </div>
 
 ---
+
+<div>
+<a href="https://drive.google.com/drive/folders/1L6zySRzp45_Y8vorld54O9FlnvdPsgSC" align="center">Bemutató</a>
+</div>
+
+---
