@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DolgozoController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,3 +36,18 @@ Route::get('/payroll-calculation', function () {
 });
 
 Route::get('/dolgozok', [DolgozoController::class, 'index']);
+
+Route::post('/api/set-admin-session', function (Illuminate\Http\Request $request) 
+{
+    if ($request->admin === true) 
+    {
+        session(['isAdmin' => true]);
+    }
+    return response()->json(['message' => 'Session frissítve.']);
+});
+
+Route::post('/logout', function () 
+{
+    session()->flush();
+    return redirect('/');
+})->name('logout');
