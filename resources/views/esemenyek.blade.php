@@ -5,15 +5,21 @@
     <link rel="icon" type="image/x-icon" href="kepek/icon.png">
     <title>Comproller - Események</title>
     <style>
-        #kozepre
+
+        body 
         {
-            display: grid;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        #kozepre 
+        {
+            width: 95%;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 20px;
         }
 
         h1 
@@ -23,275 +29,461 @@
             margin-bottom: 30px;
         }
 
-        thead 
+        #naptar_kerete 
         {
-            background-color: #2c3e50;
-            color: white;
-            text-transform: uppercase;
-            font-weight: bold;
+            background-color: white;
+            border: 2px solid #2c3e50;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        th, td 
+        #naptar_navigacio 
         {
-            padding: 15px 20px;
-            text-align: left;
-            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
-        tbody tr:hover 
+        #naptar_cim 
         {
-            background-color: #e8f4f8;
+            font-size: 1.5em;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .nav_gomb 
+        {
+            background-color: #e1ecf4;
+            border: 1px solid #7aa7c7;
+            border-radius: 3px;
+            color: #39739d;
+            padding: 6px 12px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        #a_tablazat 
+        .nav_gomb:hover 
         {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            background-color: white;
-            margin-bottom: 30px;
-            width: 100%;
+            background-color: #b3d3ea;
         }
 
-        #kereses_bemenet,
-        #sor_bemenet,
-        #esemeny_bemenet
+        #naptar_container
         {
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin: 10px;
-            font-size: 14px;
-            width: 250px;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
         }
 
-        .button-8 
+        .naptar_nap 
         {
-            background-color: #e1ecf4;
-            border-radius: 3px;
-            border: 1px solid #7aa7c7;
-            box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
-            box-sizing: border-box;
-            color: #39739d;
-            cursor: pointer;
-            display: inline-block;
-            font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
-            font-size: 13px;
-            font-weight: 400;
-            line-height: 1.15385;
-            margin: 10px;
-            padding: 8px .8em;
-            position: relative;
+            border: 1px solid #e0e0e0;
+            min-height: 80px;
+            padding: 10px;
             text-align: center;
-            text-decoration: none;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            vertical-align: baseline;
+            position: relative;
+            transition: background-color 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .naptar_nap:hover 
+        {
+            background-color: #e8f4f8;
+            cursor: pointer;
+        }
+
+        .naptar_nap.aktiv_nap 
+        {
+            background-color: #e8f4f8;
+            border-color: #2c3e50;
+        }
+
+        .esemeny 
+        {
+            background-color: #2c3e50;
+            color: white;
+            padding: 5px;
+            margin: 3px 0;
+            border-radius: 3px;
+            font-size: 0.8em;
+            overflow: hidden;
+            text-overflow: ellipsis;
             white-space: nowrap;
         }
 
-        .button-8:hover,
-        .button-8:focus 
+        #esemeny_lista 
+        {
+            margin-top: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #esemeny_lista table 
+        {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #esemeny_lista thead 
+        {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        #esemeny_lista th, #esemeny_lista td 
+        {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .gomb_skin 
+        {
+            background-color: #e1ecf4;
+            border: 1px solid #7aa7c7;
+            border-radius: 3px;
+            color: #39739d;
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .gomb_skin:hover 
         {
             background-color: #b3d3ea;
-            color: #2c5777;
         }
 
-        .button-8:active 
+        #esemeny_modal 
         {
-            background-color: #a0c7e4;
-            box-shadow: none;
-            color: #2c5777;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
         }
 
-        @media (max-width: 768px) 
+        .modal_tartalom 
         {
-            #kozepre
-            {
-                padding: 10px;
-            }
-
-            table, thead, tbody, th, td, tr 
-            {
-                display: block;
-            }
-            
-            th, td 
-            {
-                text-align: left;
-                padding: 12px 15px;
-            }
-
-            thead 
-            {
-                display: none;
-            }
-
-            tr 
-            {
-                margin-bottom: 15px;
-                border-bottom: 2px solid #ddd;
-            }
-
-            #kereses_bemenet,
-            #sor_bemenet,
-            #esemeny_bemenet
-            {
-                width: 100%;
-                margin: 5px 0;
-            }
-
-            .button-8 
-            {
-                width: 100%;
-                margin: 5px 0;
-            }
+            background-color: white;
+            width: 90%;
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
+
+        .het_napjai 
+        {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
     @include('navbarandfooter/nav')
+
+    <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "comproller";
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        if ($conn->connect_error) 
+        {
+            die("Kapcsolódási hiba: " . $conn->connect_error);
+        }
+    ?>
     
-    <div>
-        
-    </div>
-
     <div id="kozepre">
-        <h1>Jelenlegi események a cégnél:</h1>
+        <h1>Naptár és események</h1>
 
-        <table id="a_tablazat">
-            <thead>
-                <tr>
-                    <th>Oszlop 1</th>
-                    <th>Oszlop 2</th>
-                    <th>Oszlop 3</th>
-                </tr>
-            </thead>
-            <tbody> 
-                <tr id="sor1">
-                </tr>
-                <tr id="sor2">
-                </tr>
-                <tr id="sor3">
-                </tr>
-            </tbody>
-        </table>
+        <div id="naptar_kerete">
+            <div id="naptar_navigacio">
+                <button onclick="elozo_honap()" class="nav_gomb">Előző</button>
+                <div id="naptar_cim"></div>
+                <button onclick="kovetkezo_honap()" class="nav_gomb">Következő</button>
+            </div>
 
-        <div>
-            <label>Keresés:</label>
-            <input type="text" id="kereses_bemenet" placeholder="Írj be egy keresett eseményt...">
-            <button type="button" onclick="kereses()" class="button-8" role="button">Keresés</button>
+            <div class="het_napjai">
+                <div>Hétfő</div>
+                <div>Kedd</div>
+                <div>Szerda</div>
+                <div>Csütörtök</div>
+                <div>Péntek</div>
+                <div>Szombat</div>
+                <div>Vasárnap</div>
+            </div>
+
+            <div id="naptar_container"></div>
         </div>
 
-        <div>
-            <input type="text" id="sor_bemenet" placeholder="Írj be egy sort...">
-            <input type="text" id="esemeny_bemenet" placeholder="Írj be egy eseményt...">
-            <button onclick="hozzaadas()" class="button-8" role="button">Új esemény hozzáadása</button>
+        <div id="esemeny_lista">
+            <table>
+                <thead>
+                    <tr>                    
+                        <th>Esemény</th>
+                        <th>Dátum</th>
+                        <th>Műveletek</th>
+                    </tr>
+                </thead>
+                <tbody id="osszes_esemeny"></tbody>
+                <?php
+
+                    $sql = "SELECT id, esemeny_neve, datum FROM esemenyek";
+                    $result = $conn->query($sql);
+
+                    if ($result-> num_rows > 0) 
+                    {
+                        while ($row = $result->fetch_assoc()) 
+                        {
+                            echo '<tr>';
+                            echo '    <td data-label="Esemény Neve">' . htmlspecialchars($row["esemeny_neve"]) . '</td>';
+                            echo '    <td data-label="Dátum">' . htmlspecialchars($row["datum"]) . '</td>';
+                            echo '    <td data-label="Műveletek">';
+                            echo '        <form action="torles.php" method="post" id="form2" target="/events">';
+                            echo '            <input type="hidden" name="esemeny_neve" value="' . htmlspecialchars($row["esemeny_neve"]) . '" >';
+                            echo '            <input type="submit" class="gomb_skin" value="Törlés" onclick="oldal_frissites()">';
+                            echo '        </form>';                            
+                            echo '    </td>';
+                            echo '</tr>';
+                        }
+                    }
+
+                    $conn->close();
+
+                ?>
+
+            </table>
         </div>
+
+        <div id="esemeny_modal" style="display: none;">
+            <div class="modal_tartalom">
+                <h2 id="datum_cim">Új esemény hozzáadása</h2>
+                <form action="hozzaadas.php" method="post" onsubmit="return ellenorzes();" target="/events" id="form1">
+                    <input type="hidden" name="datum" id="modal_datum_input">
+                    <input type="text" name="esemeny_leiras" id="esemeny_bevitel" placeholder="Esemény leírása" 
+                        style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
+                    <button type="submit" class="gomb_skin" onclick="oldal_frissites()">Mentés</button>
+                    <button type="button" onclick="modal_bezarasa()" class="gomb_skin">Mégsem</button>
+                </form>
+            </div>
+        </div>
+
+
     </div>
 
     @include('navbarandfooter/footer')
 
-    <script>       
-        let sor1_esemenyek = 0;
-        let sor2_esemenyek = 0;
-        let sor3_esemenyek = 0;
+    <script>
 
-        let sor1_lista = [];
-        let sor2_lista = [];
-        let sor3_lista = [];
+        let aktualis_ev = new Date().getFullYear();
+        let aktualis_honap = new Date().getMonth();
+        let kivalasztott_datum = null;
+        let naptar_esemenyek = {};
 
-        function hozzaadas() 
+        function cimfrissites() 
         {
-            let sor_bemenet = document.getElementById("sor_bemenet").value;
-            let esemeny_bemenet = document.getElementById("esemeny_bemenet").value;
+            let honapok = [
+                'Január', 'Február', 'Március', 'Április', 'Május', 'Június', 
+                'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'
+            ];
+            document.getElementById('naptar_cim').textContent = 
+                `${honapok[aktualis_honap]} ${aktualis_ev}`;
+        }
 
-            if (sor_bemenet != 0 && sor_bemenet < 4 && esemeny_bemenet != "")
-            { 
-                if (sor1_esemenyek == 3 && sor_bemenet == 1 || sor2_esemenyek == 3 && sor_bemenet == 2 || sor3_esemenyek == 3 && sor_bemenet == 3)
+        function elozo_honap() 
+        {
+            aktualis_honap--;
+            if (aktualis_honap < 0) 
+            {
+                aktualis_honap = 11;
+                aktualis_ev--;
+            }
+            naptar_frissites();
+        }
+
+        function kovetkezo_honap() 
+        {
+            aktualis_honap++;
+            if (aktualis_honap > 11) 
+            {
+                aktualis_honap = 0;
+                aktualis_ev++;
+            }
+            naptar_frissites();
+        }
+
+        function naptar_frissites() 
+        {
+            cimfrissites();
+            
+            let naptar_kontenjer = document.getElementById('naptar_container');
+            naptar_container.innerHTML = '';
+
+            let honap_elso_napja = new Date(aktualis_ev, aktualis_honap, 1);
+            let honap_utolso_napja = new Date(aktualis_ev, aktualis_honap + 1, 0);
+
+            let elso_nap_indexe = honap_elso_napja.getDay() === 0 ? 7 : honap_elso_napja.getDay();
+            
+            for (let i = 1; i < elso_nap_indexe; i++) 
+            {
+                let ures_nap = document.createElement('div');
+                ures_nap.classList.add('naptar_nap');
+                ures_nap.style.backgroundColor = '#f9f9f9';
+                ures_nap.style.color = '#cccccc';
+                naptar_container.appendChild(ures_nap);
+            }
+
+            for (let nap = 1; nap <= honap_utolso_napja.getDate(); nap++) 
+            {
+                let nap_elem = document.createElement('div');
+                nap_elem.classList.add('naptar_nap');
+                nap_elem.textContent = nap;
+                
+                let datum = `${aktualis_ev}-${String(aktualis_honap+1).padStart(2, '0')}-${String(nap).padStart(2, '0')}`;
+                nap_elem.setAttribute('data-datum', datum);
+                
+                if (naptar_esemenyek[datum]) 
                 {
-                    alert("Az események megteltek!");
+                    naptar_esemenyek[datum].forEach(function(esemeny) 
+                    {
+                        let esemeny_elem = document.createElement('div');
+                        esemeny_elem.classList.add('esemeny');
+                        esemeny_elem.textContent = esemeny;
+                        nap_elem.appendChild(esemeny_elem);
+                    });
                 }
-                else
-                {               
-                    let esemeny = document.createElement("td");
-                    esemeny.textContent = esemeny_bemenet;
-                    let kivalasztott = document.getElementById("sor" + sor_bemenet);
-                    kivalasztott.addEventListener("click",torles);
 
-                    if (sor_bemenet == 1)
-                    {
-                        sor1_esemenyek++;
-                        esemeny.setAttribute("id","cella1_" + sor1_esemenyek);
-                        sor1_lista.push(esemeny_bemenet);
-                    }
-                    else if (sor_bemenet == 2)
-                    {
-                        sor2_esemenyek++;
-                        esemeny.setAttribute("id","cella2_" + sor2_esemenyek);
-                        sor2_lista.push(esemeny_bemenet);
-                    }
-                    else if (sor_bemenet == 3)
-                    {
-                        sor3_esemenyek++;
-                        esemeny.setAttribute("id","cella3_" + sor3_esemenyek);
-                        sor3_lista.push(esemeny_bemenet);
-                    }
-
-                    kivalasztott.appendChild(esemeny);
-                }
+                nap_elem.addEventListener('click', datum_valasztas);
+                naptar_container.appendChild(nap_elem);
             }
-            else
+
+            esemeny_frissites();
+        }
+
+        function datum_valasztas(esemeny) 
+        {
+            let elozo = document.querySelector('.aktiv_nap');
+            if (elozo) elozo.classList.remove('aktiv_nap');
+
+            esemeny.currentTarget.classList.add('aktiv_nap');
+            kivalasztott_datum = esemeny.currentTarget.getAttribute('data-datum');
+
+            document.getElementById('datum_cim').textContent = kivalasztott_datum;
+            document.getElementById('modal_datum_input').value = kivalasztott_datum;
+            document.getElementById('esemeny_modal').style.display = 'block';
+        }
+
+        function esemeny_hozzaadasa() 
+        {
+            let esemeny_input = document.getElementById('esemeny_bevitel');
+            let esemeny = esemeny_input.value.trim();
+
+            if (esemeny && kivalasztott_datum) 
             {
-                alert("Nem jó adatok!");
+                if (!naptar_esemenyek[kivalasztott_datum]) 
+                {
+                    naptar_esemenyek[kivalasztott_datum] = [];
+                }
+
+                naptar_esemenyek[kivalasztott_datum].push(esemeny);
+                
+                esemeny_bevitel.value = '';
+                modal_bezarasa();
+                naptar_frissites();
             }
         }
 
-        function torles()
+        function esemeny_frissites() 
         {
-            let sor_id = this.getAttribute("id");
-            let sor_szamok = document.getElementById(sor_id).children.length;
-            let a_sor = document.getElementById(sor_id);
+            let tbody = document.getElementById('osszes_esemeny');
+            tbody.innerHTML = '';
 
-            while (sor_szamok != 0)
+            Object.keys(naptar_esemenyek).forEach(function(datum) 
             {
-                a_sor.removeChild(a_sor.lastChild);
-                sor_szamok--;
-            }
+                naptar_esemenyek[datum].forEach(function(esemeny)
+                {
+                    let sor = tbody.insertRow();
+                    sor.insertCell(0).textContent = datum;
+                    sor.insertCell(1).textContent = esemeny;
+                    
+                    let torles_gomb = document.createElement('button');
+                    torles_gomb.textContent = 'Törlés';
+                    torles_gomb.classList.add('gomb_skin');
+                    torles_gomb.onclick = function() 
+                    {
+                        naptar_esemenyek[datum] = naptar_esemenyek[datum].filter(function(e) 
+                        {
+                            return e !== esemeny;
+                        });
 
-            if (sor_id == "sor1")
-            {
-                sor1_esemenyek = 0;
-                sor1_lista = [];
-            }
-            else if (sor_id == "sor2")
-            {
-                sor2_esemenyek = 0;
-                sor2_lista = [];
-            }
-            else if (sor_id == "sor3")
-            {
-                sor3_esemenyek = 0;
-                sor3_lista = [];
-            }
-        }  
-        
-        function kereses()
-        {
-            let kereses_bemenet = document.getElementById("kereses_bemenet").value;
-
-            if (sor1_lista.includes(kereses_bemenet) || sor2_lista.includes(kereses_bemenet) || sor3_lista.includes(kereses_bemenet))
-            {
-                alert("Talált!");
-            }
-            else
-            {
-                alert("Nem talált.");
-            }
+                        if (naptar_esemenyek[datum].length === 0) 
+                        {
+                            delete naptar_esemenyek[datum];
+                        }
+                        naptar_frissites();
+                    };
+                    
+                    let muvelet = sor.insertCell(2);
+                    muvelet.appendChild(torles_gomb);
+                });
+            });
         }
+
+        function modal_megnyitasa() 
+        {
+            document.getElementById("esemeny_modal").style.display = "block";
+        }
+
+        function modal_bezarasa() 
+        {
+            document.getElementById("esemeny_modal").style.display = "none";
+        }
+
+        function ellenorzes() 
+        {
+            let leiras = document.getElementById("esemeny_bevitel").value.trim();
+            let datum = document.getElementById("modal_datum_input").value.trim();
+
+            if (leiras === "" || datum === "") 
+            {
+                alert("Kérjük, töltsd ki az összes mezőt!");
+                return false;
+            }
+
+            return true;
+
+        }
+
+        naptar_frissites();
+
+        function oldal_frissites()
+        {
+
+            location.reload();
+
+        }
+
+        let form1 = document.getElementById("form1");
+        let form2 = document.getElementById("form2");
+
+        form1.reset();
+        form2.reset();
+
     </script>
 </body>
 </html>
