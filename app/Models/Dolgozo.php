@@ -10,9 +10,9 @@ class Dolgozo extends Model
     
     use HasFactory;
 
-    protected $table = 'dolgozok';
+    protected $table = 'nyilvantartas';
     protected $primaryKey = 'DolgozoID';
-    protected $fillable = ['Nev', 'Email', 'Telefonszam', 'Munkakor'];
+    protected $fillable = ['Vezeteknev', 'Keresztnev', 'Email', 'Telefonszam', 'Munkakor'];
     public $timestamps = false;
 
 }

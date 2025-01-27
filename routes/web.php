@@ -51,3 +51,10 @@ Route::post('/logout', function ()
     session()->flush();
     return redirect('/');
 })->name('logout');
+
+Route::get('/registry', function () {
+
+    $Dolgozok = DB::table('nyilvantartas')->get();
+
+    return view('nyilvantartas', ['Dolgozok' => $Dolgozok]);
+});

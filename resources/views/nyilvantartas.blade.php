@@ -193,92 +193,41 @@
 </head>
 <body>
     @include('navbarandfooter/nav')
-
-    <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "comproller";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        if ($conn->connect_error) 
-        {
-            die("Kapcsolódási hiba: " . $conn->connect_error);
-        }
-    ?>
-
     <div class="nyilvantartas_tarolo">
         <div class="fulek_tarolo">
             <button class="ful ful_aktiv">Dolgozók</button>
-            <button class="ful">Projektek</button>
+            <button class="ful">Felvétel</button>
             <button class="ful">Eszközök</button>
         </div>
 
-        <div class="szuro_sav">
-            <input type="text" class="szuro_mezo" placeholder="Keresés név szerint...">
-            <select class="szuro_mezo">
-                <option value="">Részleg kiválasztása</option>
-                <option value="fejlesztes">Fejlesztés</option>
-                <option value="hr">HR</option>
-                <option value="penzugy">Pénzügy</option>
-            </select>
-            <select class="szuro_mezo">
-                <option value="">Státusz</option>
-                <option value="aktiv">Aktív</option>
-                <option value="inaktiv">Inaktív</option>
-            </select>
-        </div>
-
         <div class="tablazat_tarolo">
-            <?php
-                $sql = "SELECT Keresztnev, Vezeteknev, DolgozoID, Email, Munkakor FROM nyilvantartas";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) 
-                {
-                    echo '<table class="tablazat">';
-                    echo '<thead>';
-                    echo '    <tr>';
-                    echo '        <th>Név</th>';
-                    echo '        <th>Azonosító</th>';
-                    echo '        <th>Email</th>';
-                    echo '        <th>Pozíció</th>';
-                    echo '        <th>Státusz</th>';
-                    echo '    </tr>';
-                    echo '</thead>';
-                    echo '<tbody>';
-                    while($row = $result->fetch_assoc()) 
-                    {
-                        echo '<tr>';
-                        echo '    <td data-label="Név">' . $row["Keresztnev"] . ' ' . $row["Vezeteknev"] . '</td>';
-                        echo '    <td data-label="Azonosító">' . $row["DolgozoID"] . '</td>';
-                        echo '    <td data-label="Email">' . $row["Email"] . '</td>';
-                        echo '    <td data-label="Pozíció">' . $row["Munkakor"] . '</td>';
-                        echo '    <td data-label="Státusz"> <span class="allapot_jelzo allapot_aktiv">Aktív</span> </td>';
-                        echo '</tr>';
-                    }
-                    echo '</tbody>';
-                    echo '</table>';
-                } 
-                else 
-                {
-                    echo "Nincsenek találatok.";
-                }
-
-                $conn->close();
-            ?>
-
-            <div class="oldal_leptetok">
-                <button class="oldal_gomb">Előző</button>
-                <button class="oldal_gomb oldal_gomb_aktiv">1</button>
-                <button class="oldal_gomb">2</button>
-                <button class="oldal_gomb">3</button>
-                <button class="oldal_gomb">Következő</button>
-            </div>
+            <table class="tablazat">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Vezetéknév</th>
+                        <th>Keresztnév</th>
+                        <th>Munkakör</th>
+                        <th>Eszközök</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($Dolgozok as $Dolgozo)
+                        <tr>
+                            <td>{{ $Dolgozo->DolgozoID }}</td>
+                            <td>{{ $Dolgozo->Vezeteknev }}</td>
+                            <td>{{ $Dolgozo->Keresztnev }}</td>
+                            <td>{{ $Dolgozo->Munkakor }}</td>
+                            <td>
+                                <button class="muvelet_gomb">➖</button>
+                                <button class="muvelet_gomb">ℹ️</button>
+                                <button class="muvelet_gomb">💬</button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    </div>
-
     @include('navbarandfooter/footer')
 </body>
 </html>
