@@ -5,320 +5,352 @@
     <link rel="icon" type="image/x-icon" href="kepek/icon.png">
     <title>Comproller - Munkaidő</title>
     <style>
-        .munkaido_tarolo
-        {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .felso_sav
-        {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .datum_valaszto
-        {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .datum_gomb
-        {
-            padding: 8px 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: white;
-            cursor: pointer;
-        }
-
-        .datum_gomb:hover
-        {
-            background-color: #f5f6fa;
-        }
-
-        .aktualis_datum
-        {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .idozito_kartya
-        {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .ido_kijelzo
-        {
-            font-size: 48px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin: 20px 0;
-        }
-
-        .idozito_gombok
-        {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .kezdes_gomb
-        {
-            padding: 10px 20px;
-            border-radius: 4px;
-            border: none;
-            background-color: #27ae60;
-            color: white;
-            cursor: pointer;
-        }
-
-        .szunet_gomb
-        {
-            padding: 10px 20px;
-            border-radius: 4px;
-            border: none;
-            background-color: #f39c12;
-            color: white;
-            cursor: pointer;
-        }
-
-        .befejez_gomb
-        {
-            padding: 10px 20px;
-            border-radius: 4px;
-            border: none;
-            background-color: #e74c3c;
-            color: white;
-            cursor: pointer;
-        }
-
-        .naptar_nezet
-        {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .naptar_fejlec
-        {
-            text-align: center;
-            font-weight: bold;
-            color: #2c3e50;
-            padding: 10px;
-        }
-
-        .naptar_nap
-        {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-            padding: 10px;
-            min-height: 100px;
-            cursor: pointer;
-        }
-
-        .naptar_nap:hover
-        {
-            background-color: #f5f6fa;
-        }
-
-        .mai_nap
-        {
-            border: 2px solid #3498db;
-        }
-
-        .munkaido_lista
-        {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .munkaido_lista table
-        {
+        .navbar {
+            background-color: #7568ff;
+            border-bottom: #9d94ff 10px solid;
             width: 100%;
-            border-collapse: collapse;
         }
 
-        .munkaido_lista th
-        {
-            background-color: #2c3e50;
+        .nav-link {
+            color: #c7d8ff;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .nav-link:hover {
+            color: #0d214e;
+            font-weight: bold;
+            letter-spacing: 5px;
+            transition: 0.7s;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        .ora-tarto {
+            margin-top: 30px;
+            padding: 20px;
+            border: 5px solid #007BFF;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .ora {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .gombok {
+            display: flex;
+            gap: 10px;
+        }
+
+        .gombok button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
             color: white;
-            padding: 15px;
-            text-align: left;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
         }
 
-        .munkaido_lista td
-        {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e0e0e0;
+        .inditas {
+            background-color: #28a745;
         }
 
-        .munkaido_lista tr:hover
-        {
-            background-color: #f5f6fa;
+        .szunet {
+            background-color: #ffc107;
         }
 
-        .statusz_jelzo
-        {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
+        .befejezes {
+            background-color: #dc3545;
         }
 
-        .statusz_aktiv
-        {
-            background-color: #e8f5e9;
-            color: #2e7d32;
+        .letiltva {
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
         }
 
-        .statusz_szunet
-        {
-            background-color: #fff3e0;
-            color: #f57c00;
+        .nev-bemenet-tarto {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .statusz_befejezett
-        {
-            background-color: #ffebee;
-            color: #c62828;
+        .nev-bemenet-tarto input {
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 250px;
         }
 
-        @media (max-width: 768px)
-        {
-            .felso_sav
-            {
-                flex-direction: column;
-                align-items: stretch;
-            }
+        .nev-bemenet-tarto button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
 
-            .naptar_nezet
-            {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            }
-            
-            .munkaido_lista thead
-            {
-                display: none;
-            }
-            
-            .munkaido_lista td
-            {
-                display: block;
-                text-align: right;
-                padding-left: 50%;
-                position: relative;
-            }
-            
-            .munkaido_lista td::before
-            {
-                content: attr(data-label);
-                position: absolute;
-                left: 12px;
-                font-weight: bold;
-            }
+        .tablazat-tarto {
+            border-radius: 25px;
+            max-height: 400px;
+            overflow-y: auto;
+            width: 100%;
+            max-width: 600px;
+            border: none; /* A táblázat összes vonalának eltávolítása */
+        }
+
+        table {
+            border-radius: 25px;
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border: none; /* A táblázat összes vonalának eltávolítása */
+        }
+
+        table tr {
+            border-bottom: 1px solid #ddd; /* Csak vízszintes vonalak megjelenítése */
+        }
+
+        th, td {
+            text-align: center;
+            border: none; /* Függőleges vonalak eltávolítása */
+            padding: 10px;
+        }
+
+        th {
+            text-align: center;
+            background-color: #007BFF;
+            color: white;
+        }
+
+
+        .szerkesztes-ikon {
+            cursor: pointer;
+            color: #007BFF;
+        }
+
+        .kiemelt {
+            background-color: #e0f7fa;
+        }
+
+        .gombok {
+            display: none;
+        }
+
+        .gombok.lathato {
+            display: flex;
+        }
+
+        footer
+        {
+            background-color:#7568ff;
+            border-top:#9d94ff 10px solid;
+            color: #c7d8ff;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
         }
     </style>
 </head>
 <body>
     @include('navbarandfooter/nav')
 
-    <div class="munkaido_tarolo">
-        <div class="felso_sav">
-            <div class="datum_valaszto">
-                <button class="datum_gomb">❮</button>
-                <span class="aktualis_datum">2024 Január</span>
-                <button class="datum_gomb">❯</button>
-            </div>
+<div class="ora-tarto">
+        <div class="ora" id="ora">00:00:00</div>
+        <div class="gombok" id="gombok">
+            <button class="inditas" onclick="rogzitesInditas()" disabled>Kezdés</button>
+            <button class="szunet" onclick="rogzitesSzunet()" disabled>Szünet</button>
+            <button class="befejezes" onclick="rogzitesBefejezes()" disabled>Befejezés</button>
         </div>
-
-        <div class="idozito_kartya">
-            <h2>Mai munkaidő</h2>
-            <div class="ido_kijelzo">07:45:12</div>
-            <div class="idozito_gombok">
-                <button class="kezdes_gomb">Kezdés</button>
-                <button class="szunet_gomb">Szünet</button>
-                <button class="befejez_gomb">Befejezés</button>
-            </div>
-        </div>
-
-        <div class="naptar_nezet">
-            <div class="naptar_fejlec">H</div>
-            <div class="naptar_fejlec">K</div>
-            <div class="naptar_fejlec">Sz</div>
-            <div class="naptar_fejlec">Cs</div>
-            <div class="naptar_fejlec">P</div>
-            <div class="naptar_fejlec">Sz</div>
-            <div class="naptar_fejlec">V</div>
-
-            <div class="naptar_nap">1</div>
-            <div class="naptar_nap">2</div>
-            <div class="naptar_nap">3</div>
-            <div class="naptar_nap">4</div>
-            <div class="naptar_nap">5</div>
-            <div class="naptar_nap">6</div>
-            <div class="naptar_nap">7</div>
-        </div>
-
-        <div class="munkaido_lista">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Dátum</th>
-                        <th>Kezdés</th>
-                        <th>Befejezés</th>
-                        <th>Összes idő</th>
-                        <th>Státusz</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-label="Dátum">2024.01.17</td>
-                        <td data-label="Kezdés">08:00</td>
-                        <td data-label="Befejezés">-</td>
-                        <td data-label="Összes idő">07:45:12</td>
-                        <td data-label="Státusz">
-                            <span class="statusz_jelzo statusz_aktiv">Aktív</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Dátum">2024.01.16</td>
-                        <td data-label="Kezdés">08:15</td>
-                        <td data-label="Befejezés">16:30</td>
-                        <td data-label="Összes idő">08:15:00</td>
-                        <td data-label="Státusz">
-                            <span class="statusz_jelzo statusz_befejezett">Befejezett</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Dátum">2024.01.15</td>
-                        <td data-label="Kezdés">08:00</td>
-                        <td data-label="Befejezés">16:00</td>
-                        <td data-label="Összes idő">08:00:00</td>
-                        <td data-label="Státusz">
-                            <span class="statusz_jelzo statusz_befejezett">Befejezett</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="nev-bemenet-tarto">
+            <input type="text" id="munkasNev" placeholder="Irj be egy munkás ember nevét!">
+            <button onclick="hozzaadasATablazathoz()">Hozzadás</button>
         </div>
     </div>
+
+    <div class="tablazat-tarto">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Név</th>
+                    <th>Dátum</th>
+                    <th>Kezdés ideje</th>
+                    <th>Szünet ideje</th>
+                    <th>Befejezés ideje</th>
+                    <th>Szerkesztés</th>
+                </tr>
+            </thead>
+            <tbody id="tablazatTest">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let munkasIndex = 0;
+        let aktualisMunkasSor = null;
+        let gombokAllapota = [];
+        let kezdesiIdok = [];
+
+        function frissitesOra() {
+            const oraElem = document.getElementById('ora');
+            const most = new Date();
+            const orak = String(most.getHours()).padStart(2, '0');
+            const percek = String(most.getMinutes()).padStart(2, '0');
+            const masodpercek = String(most.getSeconds()).padStart(2, '0');
+            oraElem.textContent = `${orak}:${percek}:${masodpercek}`;
+        }
+
+        function hozzaadasATablazathoz() {
+            const kiemeltSorok = document.querySelectorAll('.kiemelt');
+            kiemeltSorok.forEach(sor => sor.classList.remove('kiemelt'));
+
+            const nevBemenet = document.getElementById('munkasNev');
+            const nev = nevBemenet.value.trim();
+            if (nev) {
+                munkasIndex++;
+                const tablazatBody = document.getElementById('tablazatTest');
+                const ujSor = document.createElement('tr');
+                const ma = new Date().toLocaleDateString();
+
+                ujSor.innerHTML = `
+                    <td>${munkasIndex}</td>
+                    <td>${nev}</td>
+                    <td>${ma}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><span class="szerkesztes-ikon" onclick="szerkesztesSor(${munkasIndex - 1})">✏️</span></td>
+                `;
+                tablazatBody.appendChild(ujSor);
+                nevBemenet.value = '';
+
+                gombokAllapota.push({inditas: false, szunet: true, befejezes: true});
+                kezdesiIdok.push(null);
+
+                gombokLathatosaga();
+                gombokAllapotBeallitas(munkasIndex - 1);
+
+                szerkesztesSor(munkasIndex - 1);
+
+                const tablazatTarto = document.querySelector('.tablazat-tarto');
+                tablazatTarto.scrollTop = tablazatTarto.scrollHeight;
+            }
+        }
+
+        function gombokLathatosaga() {
+            const gombok = document.getElementById('gombok');
+            const tablazatBody = document.getElementById('tablazatTest');
+            if (tablazatBody.children.length > 0) {
+                gombok.classList.add('lathato');
+            } else {
+                gombok.classList.remove('lathato');
+            }
+        }
+
+        function gombokAllapotBeallitas(sorIndex) {
+            const inditasBtn = document.querySelector('.inditas');
+            const szunetBtn = document.querySelector('.szunet');
+            const befejezesBtn = document.querySelector('.befejezes');
+            const allapot = gombokAllapota[sorIndex];
+
+            inditasBtn.disabled = allapot.inditas;
+            szunetBtn.disabled = allapot.szunet;
+            befejezesBtn.disabled = allapot.befejezes;
+
+            inditasBtn.classList.toggle('letiltva', allapot.inditas);
+            szunetBtn.classList.toggle('letiltva', allapot.szunet);
+            befejezesBtn.classList.toggle('letiltva', allapot.befejezes);
+        }
+
+        function rogzitesInditas() {
+            const sorIndex = aktualisMunkasSor;
+            gombokAllapota[sorIndex] = {inditas: true, szunet: false, befejezes: false};
+            gombokAllapotBeallitas(sorIndex);
+
+            const most = new Date();
+            const kezdesiIdo = most.toLocaleTimeString();
+            kezdesiIdok[sorIndex] = kezdesiIdo;
+
+            const sorok = document.querySelectorAll('tr');
+            sorok[sorIndex + 1].cells[3].textContent = kezdesiIdo;
+        }
+
+        function rogzitesSzunet() {
+            const sorIndex = aktualisMunkasSor;
+            gombokAllapota[sorIndex] = {inditas: true, szunet: true, befejezes: false};
+            gombokAllapotBeallitas(sorIndex);
+
+            const most = new Date();
+            const szunetIdo = most.toLocaleTimeString();
+
+            const sorok = document.querySelectorAll('tr');
+            sorok[sorIndex + 1].cells[4].textContent = szunetIdo;
+        }
+
+        function rogzitesBefejezes() {
+            const sorIndex = aktualisMunkasSor;
+            gombokAllapota[sorIndex] = {inditas: true, szunet: true, befejezes: true};
+            gombokAllapotBeallitas(sorIndex);
+
+            const most = new Date();
+            const befejezesIdo = most.toLocaleTimeString();
+
+            const sorok = document.querySelectorAll('tr');
+            sorok[sorIndex + 1].cells[5].textContent = befejezesIdo;
+        }
+
+        function szerkesztesSor(sorIndex) {
+            const sorok = document.querySelectorAll('tr');
+            sorok.forEach((sor, index) => {
+                if (index === sorIndex + 1) {
+                    sor.classList.add('kiemelt');
+                } else {
+                    sor.classList.remove('kiemelt');
+                }
+            });
+
+            aktualisMunkasSor = sorIndex;
+            gombokAllapotBeallitas(sorIndex);
+        }
+
+        setInterval(frissitesOra, 1000);
+    </script>
 
     @include('navbarandfooter/footer')
 </body>
