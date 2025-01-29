@@ -86,6 +86,7 @@
             position: relative;
             transition: background-color 0.3s ease;
             border-radius: 4px;
+            margin: 25px;
         }
 
         .naptar_nap:hover 
