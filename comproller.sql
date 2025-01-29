@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2025 at 08:58 PM
+-- Generation Time: Jan 28, 2025 at 07:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -84,6 +84,7 @@ CREATE TABLE `dolgozok` (
 
 CREATE TABLE `esemenyek` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `datum` date NOT NULL,
   `esemeny_neve` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -176,6 +177,7 @@ CREATE TABLE `nyilvantartas` (
   `Email` varchar(255) NOT NULL,
   `Telefonszam` varchar(255) NOT NULL,
   `Munkakor` varchar(255) NOT NULL,
+  `Megjegyzés` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -184,9 +186,9 @@ CREATE TABLE `nyilvantartas` (
 -- Dumping data for table `nyilvantartas`
 --
 
-INSERT INTO `nyilvantartas` (`DolgozoID`, `Keresztnev`, `Vezeteknev`, `Szuletesi_datum`, `Anyja_neve`, `Tajszam`, `Adoszam`, `Bankszamlaszam`, `Cim`, `Allampolgarsag`, `Tartozkodasi_hely`, `Szemelyigazolvany_szam`, `Email`, `Telefonszam`, `Munkakor`, `created_at`, `updated_at`) VALUES
-(1, 'Péter', 'Kovács', '1995.03.05', 'Virág Lili', '867 530 912', '32155599-2-10', '20018054-00000000-11711034', 'Budapest, Rákóczi u., 1192', 'magyar', 'Budapest', '2-111111-5555', 'peter33@gmail.com', '06703335677', 'hr', NULL, NULL),
-(2, 'Leander', 'Bán', '1991.06.02', 'Molnár Zoé', '233 540 411', '88832391-2-10', '30021555-00000000-12811130', 'Budapest, Gyáli út 50, 1097', 'magyar', 'Budapest', '2-222222-4444', 'ban11@gmail.com', '06301115678', 'pu', NULL, NULL);
+INSERT INTO `nyilvantartas` (`DolgozoID`, `Keresztnev`, `Vezeteknev`, `Szuletesi_datum`, `Anyja_neve`, `Tajszam`, `Adoszam`, `Bankszamlaszam`, `Cim`, `Allampolgarsag`, `Tartozkodasi_hely`, `Szemelyigazolvany_szam`, `Email`, `Telefonszam`, `Munkakor`, `Megjegyzés`, `created_at`, `updated_at`) VALUES
+(1, 'Péter', 'Kovács', '1995.03.05', 'Virág Lili', '867 530 912', '32155599-2-10', '20018054-00000000-11711034', 'Budapest, Rákóczi u., 1192', 'magyar', 'Budapest', '2-111111-5555', 'peter33@gmail.com', '06703335677', 'hr', '', NULL, NULL),
+(2, 'Leander', 'Bán', '1991.06.02', 'Molnár Zoé', '233 540 411', '88832391-2-10', '30021555-00000000-12811130', 'Budapest, Gyáli út 50, 1097', 'magyar', 'Budapest', '2-222222-4444', 'ban11@gmail.com', '06301115678', 'pu', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -208,7 +210,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('PxAucJeLlYqpAeD41mQ3APYnC4Alepf9cofGq47S', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0', 'YTozOntzOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjY6Il90b2tlbiI7czo0MDoiNWg3ZFM4dzkwaXFTNHZlZEc0b2lJMm5EMFM4Z1ExYVM5Vk54NVlCRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fX0=', 1737575548);
+('1bkyQiwM9nuRvPicLboL8YWYXUAJ1IzMIuWwvP0H', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0', 'YTozOntzOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjY6Il90b2tlbiI7czo0MDoibmVSam1nek1XVHVDdXBnSmZsNXh5VlhTa01jYWRqaFhyRGhKWXNNciI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fX0=', 1738089611);
 
 --
 -- Indexes for dumped tables

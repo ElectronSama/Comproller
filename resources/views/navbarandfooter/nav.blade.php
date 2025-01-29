@@ -30,11 +30,11 @@
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul class="navbar-nav">
-            @guest
+            @if(!session('isAdmin'))
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="/">Kezdőlap</a>
             </li>
-            @endguest
+            @endif
             @if(session('isAdmin'))
             <li class="nav-item">
               <a class="nav-link" href="/dashboard">Irányítópult</a>
@@ -52,17 +52,17 @@
               <a class="nav-link" href="/payroll-calculation">Bérszámfejtés</a>
             </li>
             @endif
-            @guest
+            @if(!session('isAdmin'))
             <li class="nav-item">
               <a class="nav-link" href="/contact">Kapcsolat</a>
             </li>
-            @endguest
+            @endif
             @if(session('isAdmin'))
             <li class="nav-item">
               <a class="nav-link" href="/profile">Profil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick="logout()">Kijelentkezés</a>
+              <a class="nav-link" href="#" onclick="kijelentkezes()">Kijelentkezés</a>
             </li>
             @endif
           </ul>
@@ -74,23 +74,35 @@
   </div>
 </nav>
 <script>
-  function logout() 
+
+  function kijelentkezes() 
   {
+
       fetch('{{ route('logout') }}', 
       {
           method: 'POST',
-          headers: {
+          headers: 
+          {
               'Content-Type': 'application/json',
               'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
           }
-      }).then(response => {
-          if (response.ok) {
+      })
+      .then(function(valasz) 
+      {
+          if (valasz.ok) 
+          {
               window.location.href = '/';
-          } else {
+          } 
+          else 
+          {
               alert('Kijelentkezési hiba!');
           }
-      }).catch(error => {
-          console.error('Hiba a kijelentkezés során:', error);
+      })
+      .catch(function(hiba) 
+      {
+          console.error('Hiba a kijelentkezés során:', hiba);
       });
+
   }
+
 </script>
