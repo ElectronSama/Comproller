@@ -216,54 +216,54 @@
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 
-        <div class="nyilvantartas_tarolo">
-            <div class="tablazat_tarolo">
-                <table class="tablazat">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Vezetéknév</th>
-                            <th>Keresztnév</th>
-                            <th>Munkakör</th>
-                            <th>Eszközök</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($Dolgozok as $Dolgozo)
+            <div class="nyilvantartas_tarolo">
+                <div class="tablazat_tarolo">
+                    <table class="tablazat">
+                        <thead>
                             <tr>
-                                <td>{{ $Dolgozo->DolgozoID }}</td>
-                                <td>{{ $Dolgozo->Vezeteknev }}</td>
-                                <td>{{ $Dolgozo->Keresztnev }}</td>
-                                <td>{{ $Dolgozo->Munkakor }}</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger btn-sm col-1" onclick="torles({{ $Dolgozo->DolgozoID }})">-</button>
-                                    <button type="button" class="btn btn-primary btn-sm col-1" onclick="lekeres({{ $Dolgozo->DolgozoID }})">i</button>
-                                    <button type="button" class="btn btn-success btn-sm col-5" onclick="">Megjegyzés</button>
-                                </td>
+                                <th>ID</th>
+                                <th>Vezetéknév</th>
+                                <th>Keresztnév</th>
+                                <th>Munkakör</th>
+                                <th>Eszközök</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div id="modal" class="modal hidden">
-                <div class="modal-content">
-                    <span class="close-button" onclick="bezaras()">×</span>
-                    <h2>Dolgozó adatai</h2>
-                    <p><strong>Vezetéknév:</strong> <span id="modal_vezeteknev"></span></p>
-                    <p><strong>Keresztnév:</strong> <span id="modal_keresztnev"></span></p>
-                    <p><strong>Email:</strong> <span id="modal_email"></span></p>
-                    <p><strong>Telefonszám:</strong> <span id="modal_telefonszam"></span></p>
-                    <p><strong>Munkakör:</strong> <span id="modal_munkakor"></span></p>
+                        </thead>
+                        <tbody>
+                            @foreach ($Dolgozok as $Dolgozo)
+                                <tr>
+                                    <td>{{ $Dolgozo->DolgozoID }}</td>
+                                    <td>{{ $Dolgozo->Vezeteknev }}</td>
+                                    <td>{{ $Dolgozo->Keresztnev }}</td>
+                                    <td>{{ $Dolgozo->Munkakor }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm col-1" onclick="torles({{ $Dolgozo->DolgozoID }})">-</button>
+                                        <button type="button" class="btn btn-primary btn-sm col-1" onclick="lekeres({{ $Dolgozo->DolgozoID }})">i</button>
+                                        <button type="button" class="btn btn-success btn-sm col-5" onclick="">Megjegyzés</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div id="modal" class="modal hidden">
+                    <div class="modal-content">
+                        <span class="close-button" onclick="bezaras()">×</span>
+                        <h2>Dolgozó adatai</h2>
+                        <p><strong>Vezetéknév:</strong> <span id="modal_vezeteknev"></span></p>
+                        <p><strong>Keresztnév:</strong> <span id="modal_keresztnev"></span></p>
+                        <p><strong>Email:</strong> <span id="modal_email"></span></p>
+                        <p><strong>Telefonszám:</strong> <span id="modal_telefonszam"></span></p>
+                        <p><strong>Munkakör:</strong> <span id="modal_munkakor"></span></p>
+                    </div>
                 </div>
             </div>
-        </div>
 
         </div>
 
         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
             ...
         </div>
-        
+
     </div>
     @include('navbarandfooter/footer')
     <script>
