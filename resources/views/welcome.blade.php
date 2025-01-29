@@ -5,14 +5,17 @@
     <link rel="icon" type="image/x-icon" href="kepek/icon.png">
     <title>Comproller - Főoldal</title>
         <style>
-        * {
+
+        * 
+        {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: "Arial", sans-serif;
         }
 
-        body {
+        body 
+        {
             background-image: url('{{ asset('kepek/vszellem.png') }}');
             background-size: cover;
             background-position: center;
@@ -23,35 +26,34 @@
             flex-direction: column;
         }
 
-        .navbar {
+        .navbar 
+        {
             width: 100%;
             background-color: #7568ff;
             border-bottom: #9d94ff 10px solid;
         }
 
-        .navbar-nav {
+        .navbar-nav 
+        {
             margin-left: 0;
         }
 
-        @media (max-width: 768px) {
-            .navbar .nav-item {
-                margin-left: 0;
-            }
-        }
-
-        .navbar .nav-link {
+        .navbar .nav-link 
+        {
             color: #c7d8ff;
             font-weight: bold;
         }
 
-        .navbar .nav-link:hover {
+        .navbar .nav-link:hover 
+        {
             color: #0d214e;
             font-weight: bold;
             letter-spacing: 5px;
             transition: 0.7s;
         }
 
-        .wrapper {
+        .wrapper 
+        {
             position: relative;
             width: 400px;
             height: auto;
@@ -62,19 +64,22 @@
             margin: 220px auto 20px auto;
         }
 
-        h2 {
+        h2 
+        {
             font-size: 30px;
             color: black;
             text-align: center;
         }
 
-        .input-group {
+        .input-group 
+        {
             position: relative;
             margin: 30px 0;
             border-bottom: 2px solid grey;
         }
 
-        .input-group label {
+        .input-group label 
+        {
             position: absolute;
             top: 50%;
             left: 5px;
@@ -85,7 +90,8 @@
             transition: top 0.5s;
         }
 
-        .input-group input {
+        .input-group input 
+        {
             width: 100%;
             height: 40px;
             font-size: 16px;
@@ -97,11 +103,13 @@
         }
 
         .input-group input:focus ~ label,
-        .input-group input:valid ~ label {
+        .input-group input:valid ~ label 
+        {
             top: -5px;
         }
 
-        .jelszo-icon {
+        .jelszo-icon 
+        {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -109,7 +117,8 @@
             cursor: pointer;
         }
 
-        button {
+        button 
+        {
             position: relative;
             width: 100%;
             height: 40px;
@@ -123,11 +132,13 @@
             border: 2px solid blue;
         }
 
-        button:hover {
+        button:hover 
+        {
             background-color: rgb(222, 230, 233);
         }
 
-        footer {
+        footer 
+        {
             width: 100%;
             background-color: #7568ff;
             text-align: center;
@@ -135,6 +146,7 @@
             padding: 10px 0;
             margin-top: auto;
         }
+        
     </style>
 </head>
 <body>
@@ -222,8 +234,8 @@
             let jelszavak = [];
             let szerepek = [];
 
-            var data = <?php echo json_encode($data); ?>;
-            data.forEach(function(user) 
+            let adat = <?php echo json_encode($data); ?>;
+            adat.forEach(function(user) 
             {
                 felhasznalok.push(user.felhasznalonev);
                 jelszavak.push(user.jelszo);
@@ -267,7 +279,7 @@
                     if (admin == true)
                     {                   
 
-                        if (admin == true) 
+                        if (admin) 
                         {
                             fetch('/api/set-admin-session', 
                             {
@@ -278,7 +290,7 @@
                                 },
                                 body: JSON.stringify({ admin: true })
                             })
-                            .then(response => 
+                            .then(function(response) 
                             {
                                 if (response.ok) 
                                 {
@@ -289,7 +301,8 @@
                                     alert("Hiba történt a jogosultság frissítése közben.");
                                 }
                             })
-                            .catch(error => {
+                            .catch(function(error) 
+                            {
                                 console.error('Hiba:', error);
                             });
                         }

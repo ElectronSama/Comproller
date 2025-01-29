@@ -3,8 +3,10 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="kepek/icon.png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Comproller - Nyilvántartás</title>
     <style>
+
         .nyilvantartas_tarolo
         {
             padding: 20px;
@@ -156,39 +158,49 @@
             color: #c62828;
         }
 
-        @media (max-width: 768px)
+        .modal 
         {
-            .szuro_sav
-            {
-                flex-direction: column;
-            }
-
-            .szuro_mezo
-            {
-                width: 100%;
-            }
-            
-            .tablazat thead
-            {
-                display: none;
-            }
-            
-            .tablazat td
-            {
-                display: block;
-                text-align: right;
-                padding-left: 50%;
-                position: relative;
-            }
-            
-            .tablazat td::before
-            {
-                content: attr(data-label);
-                position: absolute;
-                left: 12px;
-                font-weight: bold;
-            }
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
         }
+
+        .modal.hidden 
+        {
+            display: none !important;
+        }
+
+        .modal-content 
+        {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: left;
+            position: relative;
+        }
+
+        .close-button 
+        {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .hidden 
+        {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
@@ -219,15 +231,113 @@
                             <td>{{ $Dolgozo->Keresztnev }}</td>
                             <td>{{ $Dolgozo->Munkakor }}</td>
                             <td>
-                                <button type="button" class="btn btn-danger btn-sm col-1">-</button>
-                                <button type="button" class="btn btn-primary btn-sm col-1">i</button>
-                                <button type="button" class="btn btn-success btn-sm col-5">Megjegyzés</button>
+                                <button type="button" class="btn btn-danger btn-sm col-1" onclick="torles({{ $Dolgozo->DolgozoID }})">-</button>
+                                <button type="button" class="btn btn-primary btn-sm col-1" onclick="lekeres({{ $Dolgozo->DolgozoID }})">i</button>
+                                <button type="button" class="btn btn-success btn-sm col-5" onclick="">Megjegyzés</button>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button" onclick="bezaras()">×</span>
+                <h2>Dolgozó adatai</h2>
+                <p><strong>Vezetéknév:</strong> <span id="modal_vezeteknev"></span></p>
+                <p><strong>Keresztnév:</strong> <span id="modal_keresztnev"></span></p>
+                <p><strong>Email:</strong> <span id="modal_email"></span></p>
+                <p><strong>Telefonszám:</strong> <span id="modal_telefonszam"></span></p>
+                <p><strong>Munkakör:</strong> <span id="modal_munkakor"></span></p>
+            </div>
+        </div>
+
+    </div>
+
     @include('navbarandfooter/footer')
+    <script>
+        let ember_adatok = document.getElementById("ember_adatok");
+        let ember_szamok = ember_adatok.children.length;
+        for (let i = 0; i < ember_szamok; i++)
+        {
+            let az_id = "resz" + i;
+            ember_adatok.children[i].setAttribute("id", az_id);
+            
+        }
+        function torles(id)
+        {
+            if (!id) return;
+            fetch('/dolgozok/' + id,
+            {
+                method: 'DELETE',
+                headers:
+                {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(function(response)
+            {
+                return response.json();
+            })
+            .then(function(data)
+            {
+                if (data.success)
+                {
+                    console.log("Dolgozó törölve:", id);
+                    document.getElementById('resz' + id).remove();
+                }
+                else
+                {
+                    alert(data.message);
+                }
+            })
+            .catch(function(error)
+            {
+                console.error("Hiba történt a törlés során:", error);
+            });
+        }
+        function lekeres(id)
+        {
+            fetch('/dolgozok/' + id)
+                .then(function(response)
+                {
+                    return response.json();
+                })
+                .then(function(data)
+                {
+                    console.log('Parsed data:', data);
+                    
+                    if (data.success)
+                    {
+                        document.getElementById("modal_vezeteknev").innerText = data.dolgozo.Vezeteknev;
+                        document.getElementById("modal_keresztnev").innerText = data.dolgozo.Keresztnev;
+                        document.getElementById("modal_email").innerText = data.dolgozo.Email;
+                        document.getElementById("modal_telefonszam").innerText = data.dolgozo.Telefonszam;
+                        document.getElementById("modal_munkakor").innerText = data.dolgozo.Munkakor;
+                        let modal = document.getElementById("modal");
+                        modal.classList.remove("hidden");
+                        modal.style.display = "flex";
+                    }
+                    else
+                    {
+                        console.error('Sikertelen adatlekérés:', data.message);
+                        alert("Hiba történt az adatok lekérése közben.");
+                    }
+                })
+                .catch(function(error)
+                {
+                    console.error('Fetch hiba:', error);
+                    alert("Hiba történt az adatok lekérése közben.");
+                });
+        }
+        function bezaras()
+        {
+            let modal = document.getElementById("modal");
+            modal.classList.add("hidden");
+            modal.style.display = "none";
+        }
+    </script>
 </body>
 </html>
