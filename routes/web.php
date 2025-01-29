@@ -58,3 +58,10 @@ Route::get('/registry', function () {
 
     return view('nyilvantartas', ['Dolgozok' => $Dolgozok]);
 });
+
+Route::get('/dashboard', function () {
+
+    $Dolgozok = DB::table('nyilvantartas')->get();
+
+    return view('iranyitopult', ['Dolgozok' => $Dolgozok]);
+});

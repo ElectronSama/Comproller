@@ -219,9 +219,9 @@
                             <td>{{ $Dolgozo->Keresztnev }}</td>
                             <td>{{ $Dolgozo->Munkakor }}</td>
                             <td>
-                                <button class="muvelet_gomb">➖</button>
-                                <button class="muvelet_gomb">ℹ️</button>
-                                <button class="muvelet_gomb">💬</button>
+                                <button type="button" class="btn btn-danger btn-sm col-1">-</button>
+                                <button type="button" class="btn btn-primary btn-sm col-1">i</button>
+                                <button type="button" class="btn btn-success btn-sm col-5">Megjegyzés</button>
                             </td>
                         </tr>
                     @endforeach

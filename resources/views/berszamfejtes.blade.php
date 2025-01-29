@@ -133,11 +133,6 @@
     <div class="berszamfejtes_tarolo">
         <div class="kartyak_tarolo">
             <div class="kartya">
-                <div class="kartya_cim">Összes Alkalmazott</div>
-                <div class="kartya_ertek">156</div>
-                <div class="kartya_leiras">12 új belépő a hónapban</div>
-            </div>
-            <div class="kartya">
                 <div class="kartya_cim">Havi Bérköltség</div>
                 <div class="kartya_ertek">45.2M Ft</div>
                 <div class="kartya_leiras">+5% az előző hónaphoz képest</div>
@@ -152,45 +147,7 @@
                 <div class="kartya_ertek">2.1M Ft</div>
                 <div class="kartya_leiras">156 óra ebben a hónapban</div>
             </div>
-        </div>
-
-        <div class="diagram_tarolo">
-            <div class="diagram">
-                <div class="diagram_cim">Aktuális Bérszámfejtések</div>
-                <table class="tablazat">
-                    <thead>
-                        <tr>
-                            <th>Részleg</th>
-                            <th>Státusz</th>
-                            <th>Határidő</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="Részleg">Fejlesztés</td>
-                            <td data-label="Státusz">
-                                <span class="statusz_jelzo statusz_feldolgozott"></span>Feldolgozva
-                            </td>
-                            <td data-label="Határidő">2024.02.05</td>
-                        </tr>
-                        <tr>
-                            <td data-label="Részleg">Marketing</td>
-                            <td data-label="Státusz">
-                                <span class="statusz_jelzo statusz_folyamatban"></span>Folyamatban
-                            </td>
-                            <td data-label="Határidő">2024.02.05</td>
-                        </tr>
-                        <tr>
-                            <td data-label="Részleg">Értékesítés</td>
-                            <td data-label="Státusz">
-                                <span class="statusz_jelzo statusz_jovahagyasra_var"></span>Jóváhagyásra vár
-                            </td>
-                            <td data-label="Határidő">2024.02.05</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
+        </div>            
             <div class="diagram">
                 <div class="diagram_cim">Bérkifizetési Napló</div>
                 <table class="tablazat">

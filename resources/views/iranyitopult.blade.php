@@ -197,27 +197,30 @@
             <div class="diagram">
                 <div class="diagram_cim">Utóljára felvitt munkavállalók</div>
                 <table class="tablazat">
-                    <thead>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Vezetéknév</th>
+                        <th>Keresztnév</th>
+                        <th>Munkakör</th>
+                        <th>Eszközök</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($Dolgozok as $Dolgozo)
                         <tr>
-                            <th>ID</th>
-                            <th>Név</th>
-                            <th>Műszak</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="ID">1</td>
-                            <td data-label="Név">John Doe</td>
-                            <td data-label="Műszak">Délután</td>
-                            <td data-label="Műszak">
-                                <button class="btn btn-info">
-                                    <i class="bi bi-info-circle"></i> 
-                                </button>
+                            <td>{{ $Dolgozo->DolgozoID }}</td>
+                            <td>{{ $Dolgozo->Vezeteknev }}</td>
+                            <td>{{ $Dolgozo->Keresztnev }}</td>
+                            <td>{{ $Dolgozo->Munkakor }}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm col-4">-</button>
+                                <button type="button" class="btn btn-primary btn-sm col-4">i</button>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
+                    @endforeach
+                </tbody>
+            </table>
             </div>
         </div>
     </div>
