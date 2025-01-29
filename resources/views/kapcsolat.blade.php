@@ -15,26 +15,45 @@
                 <h1 class="text-center mb-4">Kapcsolat</h1>
                 <div class="row g-4">
                     <div class="col-lg-8">
-                        <form id="kapcsolat-form">
-                            <div class="mb-3"> 
-                                <input type="hidden" name="access_key" value="8930859f-cfe1-4901-a61e-2015658720db">
-                                <input type="hidden" name="subject" value="New Submission from Web3Forms">
-                                <label for="name" class="form-label fw-bold">Név:</label>
-                                <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Írja be a nevét" required>
-                            </div>
+                        <form id="emailForm" action="https://api.web3forms.com/submit" method="POST" class="p-4 border rounded shadow-sm bg-light">
+                            <input type="hidden" name="access_key" value="8930859f-cfe1-4901-a61e-2015658720db">
+                            <input type="hidden" name="redirect" value="false">
+                            <input type="hidden" name="message" value="">
+                            
                             <div class="mb-3">
-                                <label for="email" class="form-label fw-bold">E-mail cím:</label>
-                                <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Írja be az e-mail címét" required>
+                                <label for="name" class="form-label">Név:</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
                             </div>
-                            <div class="mb-4">
-                                <label for="message" class="form-label fw-bold">Üzenet:</label>
-                                <textarea id="message" name="message" class="form-control form-control-lg" placeholder="Írja be az üzenetét" rows="5" required></textarea>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail:</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
                             </div>
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-dark btn-lg">Küldés</button>
+                            
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Tárgy:</label>
+                                <select id="subject" name="subject" class="form-select" required>
+                                    <option value="Általános érdeklődés">Általános érdeklődés</option>
+                                    <option value="Technikai támogatás">Technikai támogatás</option>
+                                    <option value="Visszajelzés">Visszajelzés</option>
+                                </select>
                             </div>
-                            <div id="result" class="mt-3" style="display: none;"></div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Üzenet:</label>
+                                <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
+                            </div>
+                            
+                            <input type="hidden" id="fromName" name="from_name">
+                            
+                            <button type="submit" class="btn btn-primary">Küldés</button>
                         </form>
+                        <script>
+                            document.getElementById('emailForm').addEventListener('submit', function(event) {
+                                const nameInput = document.getElementById('name').value;
+                                document.getElementById('fromName').value = nameInput;
+                            });
+                        </script>
                     </div>
                     <div class="col-lg-4">
                         <div class="card shadow h-100">
