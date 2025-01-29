@@ -93,50 +93,5 @@
         </section>
     </main>
     @include('navbarandfooter/footer')
-
-    <script>
-        const form = document.getElementById('kapcsolat-form');
-        const eredmeny = document.getElementById('result');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const jsonData = JSON.stringify(Object.fromEntries(formData));
-
-            eredmeny.style.display = "block";
-            eredmeny.className = "alert alert-info";
-            eredmeny.innerHTML = "Küldés folyamatban...";
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: jsonData
-            })
-            .then(async (response) => {
-                const data = await response.json();
-                if (response.status === 200) {
-                    eredmeny.className = "alert alert-success";
-                    eredmeny.innerHTML = "Az üzenetét sikeresen elküldtük! Hamarosan felvesszük Önnel a kapcsolatot.";
-                } else {
-                    eredmeny.className = "alert alert-danger";
-                    eredmeny.innerHTML = `Hiba történt: ${data.message}`;
-                }
-            })
-            .catch((error) => {
-                console.error('Hiba:', error);
-                eredmeny.className = "alert alert-danger";
-                eredmeny.innerHTML = "Hiba történt az üzenet elküldésekor. Próbálja újra később.";
-            })
-            .finally(() => {
-                form.reset();
-                setTimeout(() => {
-                    eredmeny.style.display = "none";
-                }, 5000);
-            });
-        });
-    </script>
 </body>
 </html>
