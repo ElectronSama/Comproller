@@ -35,8 +35,6 @@ Route::get('/payroll-calculation', function () {
     return view('berszamfejtes');
 });
 
-Route::get('/dolgozok', [DolgozoController::class, 'index']);
-
 Route::post('/api/set-admin-session', function (Illuminate\Http\Request $request) 
 {
     if ($request->admin === true) 
@@ -62,6 +60,6 @@ Route::get('/registry', function () {
 Route::get('/dashboard', function () {
 
     $Dolgozok = DB::table('nyilvantartas')->get();
-
-    return view('iranyitopult', ['Dolgozok' => $Dolgozok]);
+    $Dolgozokszama = DB::table('nyilvantartas')->count();
+    return view('iranyitopult', ['Dolgozok' => $Dolgozok, 'Dolgozokszama' => $Dolgozokszama]);
 });

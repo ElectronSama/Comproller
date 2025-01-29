@@ -160,22 +160,11 @@
     <div class="iranyitopult_tarolo">
         <div class="kartyak_tarolo">
             <div class="kartya">
-                <div class="kartya_cim">Aktív</div>
-                <div class="kartya_ertek"></div>
-                <div class="kartya_leiras"></div>
-            </div>
-            <div class="kartya">
-                <div class="kartya_cim">Szabadság</div>
-                <div class="kartya_ertek"></div>
-                <div class="kartya_leiras"></div>
-            </div>
-            <div class="kartya">
                 <div class="kartya_cim">Összes</div>
-                <div class="kartya_ertek"></div>
-                <div class="kartya_leiras"></div>
+                <div class="kartya_ertek">{{ $Dolgozokszama }}</div>
+                <div class="kartya_leiras">Az összes dolgozó száma a nyilvántartásban.</div>
             </div>
         </div>
-        
         <div class="diagram_tarolo">
             <div class="diagram">
                 <div class="diagram_cim">Legutóbbi Események</div>
