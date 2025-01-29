@@ -63,3 +63,9 @@ Route::get('/dashboard', function () {
     $Dolgozokszama = DB::table('nyilvantartas')->count();
     return view('iranyitopult', ['Dolgozok' => $Dolgozok, 'Dolgozokszama' => $Dolgozokszama]);
 });
+
+Route::get('/dolgozok', [DolgozoController::class, 'index']);
+
+Route::delete('/dolgozok/{id}', [DolgozoController::class, 'destroy'])->name('dolgozok.destroy');
+
+Route::get('/dolgozok/{id}', [DolgozoController::class, 'show']);
