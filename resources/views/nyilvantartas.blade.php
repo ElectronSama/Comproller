@@ -254,7 +254,6 @@
         </div>
 
     </div>
-
     @include('navbarandfooter/footer')
     <script>
         let ember_adatok = document.getElementById("ember_adatok");
