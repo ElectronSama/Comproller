@@ -205,7 +205,7 @@
 </head>
 <body>
     @include('navbarandfooter/nav')
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs m-5" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Összes dolgozó</button>
         </li>
@@ -261,9 +261,71 @@
         </div>
 
         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-            ...
+            <form action="{{ route('registry.store') }}" method="POST">
+                @csrf
+                <div class="row m-5">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Keresztnév</label>
+                        <input type="text" name="Keresztnev" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Vezetéknév</label>
+                        <input type="text" name="Vezeteknev" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Születési dátum</label>
+                        <input type="date" name="Szuletesi_datum" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Anyja neve</label>
+                        <input type="text" name="Anyja_neve" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">TAJ szám</label>
+                        <input type="text" name="Tajszam" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Adószám</label>
+                        <input type="text" name="Adoszam" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Bankszámlaszám</label>
+                        <input type="text" name="Bankszamlaszam" class="form-control">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Cím</label>
+                        <input type="text" name="Cim" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Állampolgárság</label>
+                        <input type="text" name="Allampolgarsag" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Tartózkodási hely</label>
+                        <input type="text" name="Tartozkodasi_hely" class="form-control">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Személyi igazolvány szám</label>
+                        <input type="text" name="Szemelyigazolvany_szam" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="Email" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Telefonszám</label>
+                        <input type="text" name="Telefonszam" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Munkakör</label>
+                        <input type="text" name="Munkakor" class="form-control" required>
+                    </div>
+                </div>
+                <div class="m-5 p-1">
+                    <button type="submit" class="btn btn-primary">Mentés</button>
+                </div>
+            </form>
         </div>
-
     </div>
     @include('navbarandfooter/footer')
     <script>

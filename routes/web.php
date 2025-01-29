@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DolgozoController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,11 +53,32 @@ Route::post('/logout', function ()
 })->name('logout');
 
 Route::get('/registry', function () {
-
     $Dolgozok = DB::table('nyilvantartas')->get();
-
     return view('nyilvantartas', ['Dolgozok' => $Dolgozok]);
-});
+})->name('registry.index');
+
+Route::post('/registry', function (Request $request) {
+    $validatedData = $request->validate([
+        'Keresztnev' => 'required|string|max:255',
+        'Vezeteknev' => 'required|string|max:255',
+        'Szuletesi_datum' => 'required|date',
+        'Anyja_neve' => 'required|string|max:255',
+        'Tajszam' => 'required|string|max:255',
+        'Adoszam' => 'required|string|max:255',
+        'Bankszamlaszam' => 'nullable|string|max:255',
+        'Cim' => 'required|string|max:255',
+        'Allampolgarsag' => 'required|string|max:255',
+        'Tartozkodasi_hely' => 'nullable|string|max:255',
+        'Szemelyigazolvany_szam' => 'required|string|max:255',
+        'Email' => 'required|email|max:255',
+        'Telefonszam' => 'required|string|max:255',
+        'Munkakor' => 'required|string|max:255',
+    ]);
+
+    DB::table('nyilvantartas')->insert($validatedData);
+
+    return redirect()->route('registry.index')->with('success', 'Dolgozó sikeresen hozzáadva.');
+})->name('registry.store');
 
 Route::get('/dashboard', function () {
 
