@@ -295,15 +295,51 @@
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Cím</label>
                         <input type="text" name="Cim" class="form-control" required>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="ugyanazCim" onchange="copyAddress()">
+                            <label class="form-check-label" for="ugyanazCim">
+                                Megegyezik a tartózkodási hely a címmel
+                            </label>
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Állampolgárság</label>
-                        <input type="text" name="Allampolgarsag" class="form-control" required>
+                        <select name="Allampolgarsag" class="form-control" required>
+                            <option value="magyar">Magyar</option>
+                            <option value="román">Román</option>
+                            <option value="szlovák">Szlovák</option>
+                            <option value="osztrák">Osztrák</option>
+                            <option value="horvát">Horvát</option>
+                            <option value="szerb">Szerb</option>
+                            <option value="szlovén">Szlovén</option>
+                            <option value="ukrán">Ukrán</option>
+                        </select>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Tartózkodási hely</label>
-                        <input type="text" name="Tartozkodasi_hely" class="form-control">
+                        <input type="text" name="Tartozkodasi_hely" class="form-control" id="tartozkodasiHely">
                     </div>
+                    <script>
+                        function copyAddress() {
+                            const checkbox = document.getElementById('ugyanazCim');
+                            const tartozkodasiHely = document.getElementById('tartozkodasiHely');
+                            const cim = document.getElementsByName('Cim')[0];
+                            
+                            if (checkbox.checked) {
+                                tartozkodasiHely.value = cim.value;
+                                tartozkodasiHely.disabled = true;
+                                
+                                cim.addEventListener('input', function() {
+                                    tartozkodasiHely.value = cim.value;
+                                });
+                            } else {
+                                tartozkodasiHely.disabled = false;
+                                cim.removeEventListener('input', function() {
+                                    tartozkodasiHely.value = cim.value;
+                                });
+                            }
+                        }
+                    </script>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Személyi igazolvány szám</label>
                         <input type="text" name="Szemelyigazolvany_szam" class="form-control" required>
@@ -314,7 +350,21 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Telefonszám</label>
-                        <input type="text" name="Telefonszam" class="form-control" required>
+                        <div class="input-group">
+                            <select class="form-select" name="CountryCode" style="max-width: 120px;">
+                                <option value="+36">+36 (HU)</option>
+                                <option value="+40">+40 (RO)</option>
+                                <option value="+421">+421 (SK)</option>
+                                <option value="+43">+43 (AT)</option>
+                                <option value="+385">+385 (HR)</option>
+                                <option value="+381">+381 (RS)</option>
+                                <option value="+386">+386 (SI)</option>
+                                <option value="+380">+380 (UA)</option>
+                            </select>
+                            <input type="tel" name="Telefonszam" class="form-control" required 
+                                   pattern="[0-9]{9}" title="Kérem adjon meg 9 számjegyet">
+                        </div>
+                        <small class="form-text text-muted">Példa: 301234567</small>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Munkakör</label>
