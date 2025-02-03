@@ -261,40 +261,40 @@
         </div>
 
         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-            <form action="{{ route('registry.store') }}" method="POST">
+            <form action="feltoltes.php" method="POST">
                 @csrf
                 <div class="row m-5">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Keresztnév</label>
-                        <input type="text" name="Keresztnev" class="form-control" required>
+                        <input type="text" name="keresztnev_input" class="form-control" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Vezetéknév</label>
-                        <input type="text" name="Vezeteknev" class="form-control" required>
+                        <input type="text" name="vezeteknev_input" class="form-control" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Születési dátum</label>
-                        <input type="date" name="Szuletesi_datum" class="form-control" required>
+                        <input type="date" name="datum_input" class="form-control" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Anyja neve</label>
-                        <input type="text" name="Anyja_neve" class="form-control" required>
+                        <input type="text" name="anyu_input" class="form-control" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">TAJ szám</label>
-                        <input type="text" name="Tajszam" class="form-control" required>
+                        <input type="text" name="tajszam_input" class="form-control" required pattern="[0-9]{9}" title="A TAJ számnak pontosan 9 számjegyből kell állnia.">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Adószám</label>
-                        <input type="text" name="Adoszam" class="form-control" required>
+                        <input type="text" name="adoszam_input" class="form-control" required pattern="[0-9]{8}-[0-9]{1}-[0-9]{2}" title="Az adószám formátuma: 12345678-1-12">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Bankszámlaszám</label>
-                        <input type="text" name="Bankszamlaszam" class="form-control">
+                        <input type="text" name="szamla_input" class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Cím</label>
-                        <input type="text" name="Cim" class="form-control" required>
+                        <input type="text" name="cim_input" class="form-control" required>
                         <div class="form-check mt-2">
                             <input class="form-check-input" type="checkbox" id="ugyanazCim" onchange="copyAddress()">
                             <label class="form-check-label" for="ugyanazCim">
@@ -304,7 +304,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Állampolgárság</label>
-                        <select name="Allampolgarsag" class="form-control" required>
+                        <select name="allam_input" class="form-control" required>
                             <option value="magyar">Magyar</option>
                             <option value="román">Román</option>
                             <option value="szlovák">Szlovák</option>
@@ -317,13 +317,13 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Tartózkodási hely</label>
-                        <input type="text" name="Tartozkodasi_hely" class="form-control" id="tartozkodasiHely">
+                        <input type="text" name="tartozkodas_input" class="form-control" id="tartozkodasiHely" required>
                     </div>
                     <script>
                         function copyAddress() {
                             const checkbox = document.getElementById('ugyanazCim');
                             const tartozkodasiHely = document.getElementById('tartozkodasiHely');
-                            const cim = document.getElementsByName('Cim')[0];
+                            const cim = document.getElementsByName('cim_input')[0];
                             
                             if (checkbox.checked) {
                                 tartozkodasiHely.value = cim.value;
@@ -342,11 +342,11 @@
                     </script>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Személyi igazolvány szám</label>
-                        <input type="text" name="Szemelyigazolvany_szam" class="form-control" required>
+                        <input type="text" name="szemelyi_input" class="form-control" required pattern="[0-9]{11}" title="A személyi számnak pontosan 11 számjegyből kell állnia.">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" name="Email" class="form-control" required>
+                        <input type="email" name="email_input" class="form-control" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Telefonszám</label>
@@ -361,14 +361,14 @@
                                 <option value="+386">+386 (SI)</option>
                                 <option value="+380">+380 (UA)</option>
                             </select>
-                            <input type="tel" name="Telefonszam" class="form-control" required 
+                            <input type="tel" name="telefon_input" class="form-control" required 
                                    pattern="[0-9]{9}" title="Kérem adjon meg 9 számjegyet">
                         </div>
                         <small class="form-text text-muted">Példa: 301234567</small>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Munkakör</label>
-                        <input type="text" name="Munkakor" class="form-control" required>
+                        <input type="text" name="munkakor_input" class="form-control" required>
                     </div>
                 </div>
                 <div class="m-5 p-1">
