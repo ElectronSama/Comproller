@@ -26,7 +26,7 @@ Route::get('/registry', function () {
 
 // Nyilvántartás új dolgozó hozzáadása //
 Route::post('/registry', function (Request $request) {
-    // Validálás
+
     $validatedData = $request->validate([
         'Keresztnev' => 'required|string|max:255',
         'Vezeteknev' => 'required|string|max:255',
@@ -43,7 +43,7 @@ Route::post('/registry', function (Request $request) {
         'Telefonszam' => 'required|string|max:255',
         'Munkakor' => 'required|string|max:255',
     ]);
-    // Adatok beszúrása
+
     DB::table('nyilvantartas')->insert($validatedData);
 
     return redirect()->route('registry.index')->with('success', 'Dolgozó sikeresen hozzáadva.');
