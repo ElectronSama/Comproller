@@ -74,3 +74,5 @@ Route::post('/logout', function () {
     session()->flush();
     return redirect('/');
 })->name('logout');
+
+Route::post('/dolgozok/update', [DolgozoController::class, 'update']);
