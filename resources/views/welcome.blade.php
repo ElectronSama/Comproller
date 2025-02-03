@@ -295,7 +295,7 @@
                             {
                                 if (response.ok) 
                                 {
-                                    window.location.reload();
+                                    window.location.href = '/dashboard';
                                 } 
                                 else 
                                 {
