@@ -249,13 +249,17 @@
                     <div class="modal-content">
                         <span class="close-button" onclick="bezaras()">×</span>
                         <h2>Dolgozó adatai</h2>
-                        <p><strong>Vezetéknév:</strong> <span id="modal_vezeteknev"></span></p>
-                        <p><strong>Keresztnév:</strong> <span id="modal_keresztnev"></span></p>
-                        <p><strong>Email:</strong> <span id="modal_email"></span></p>
-                        <p><strong>Telefonszám:</strong> <span id="modal_telefonszam"></span></p>
-                        <p><strong>Munkakör:</strong> <span id="modal_munkakor"></span></p>
+                
+                        <input type="hidden" id="modal_id">
+                        <p><strong>Vezetéknév:</strong> <input type="text" id="modal_vezeteknev"></p>
+                        <p><strong>Keresztnév:</strong> <input type="text" id="modal_keresztnev"></p>
+                        <p><strong>Email:</strong> <input type="email" id="modal_email"></p>
+                        <p><strong>Telefonszám:</strong> <input type="text" id="modal_telefonszam"></p>
+                        <p><strong>Munkakör:</strong> <input type="text" id="modal_munkakor"></p>
+                
+                        <button onclick="mentes()">Mentés</button>
                     </div>
-                </div>
+                </div>                
             </div>
 
         </div>
@@ -379,87 +383,140 @@
     </div>
     @include('navbarandfooter/footer')
     <script>
+        
         let ember_adatok = document.getElementById("ember_adatok");
         let ember_szamok = ember_adatok.children.length;
-        for (let i = 0; i < ember_szamok; i++)
+        for (let i = 0; i < ember_szamok; i++) 
         {
             let az_id = "resz" + i;
             ember_adatok.children[i].setAttribute("id", az_id);
-            
         }
-        function torles(id)
+    
+        function torles(id) 
         {
             if (!id) return;
-            fetch('/dolgozok/' + id,
+    
+            fetch('/dolgozok/' + id, 
             {
                 method: 'DELETE',
-                headers:
-                {
+                headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     'Content-Type': 'application/json',
-                },
+                }
             })
-            .then(function(response)
+            .then(function(response) 
             {
+
                 return response.json();
             })
-            .then(function(data)
+            .then(function(data) 
             {
-                if (data.success)
+                if (data.success) 
                 {
                     console.log("Dolgozó törölve:", id);
-                    document.getElementById('resz' + id).remove();
-                }
-                else
+                    document.getElementById("sor_" + id).remove();
+                } 
+                else 
                 {
                     alert(data.message);
                 }
             })
-            .catch(function(error)
+            .catch(function(error) 
             {
                 console.error("Hiba történt a törlés során:", error);
             });
         }
-        function lekeres(id)
+    
+        function lekeres(id) 
         {
             fetch('/dolgozok/' + id)
-                .then(function(response)
+                .then(function(response) 
                 {
                     return response.json();
                 })
-                .then(function(data)
+                .then(function(data) 
                 {
-                    console.log('Parsed data:', data);
-                    
-                    if (data.success)
+                    console.log('Lekért adatok:', data);
+                    if (data.success) 
                     {
-                        document.getElementById("modal_vezeteknev").innerText = data.dolgozo.Vezeteknev;
-                        document.getElementById("modal_keresztnev").innerText = data.dolgozo.Keresztnev;
-                        document.getElementById("modal_email").innerText = data.dolgozo.Email;
-                        document.getElementById("modal_telefonszam").innerText = data.dolgozo.Telefonszam;
-                        document.getElementById("modal_munkakor").innerText = data.dolgozo.Munkakor;
+                        document.getElementById("modal_id").value = id;
+                        document.getElementById("modal_vezeteknev").value = data.dolgozo.Vezeteknev;
+                        document.getElementById("modal_keresztnev").value = data.dolgozo.Keresztnev;
+                        document.getElementById("modal_email").value = data.dolgozo.Email;
+                        document.getElementById("modal_telefonszam").value = data.dolgozo.Telefonszam;
+                        document.getElementById("modal_munkakor").value = data.dolgozo.Munkakor;
+    
                         let modal = document.getElementById("modal");
                         modal.classList.remove("hidden");
                         modal.style.display = "flex";
-                    }
-                    else
+                    } 
+                    else 
                     {
-                        console.error('Sikertelen adatlekérés:', data.message);
                         alert("Hiba történt az adatok lekérése közben.");
                     }
                 })
-                .catch(function(error)
+                .catch(function(error) 
                 {
-                    console.error('Fetch hiba:', error);
+                    console.error('Hiba:', error);
                     alert("Hiba történt az adatok lekérése közben.");
                 });
         }
-        function bezaras()
+    
+        function mentes() 
         {
-            let modal = document.getElementById("modal");
-            modal.classList.add("hidden");
-            modal.style.display = "none";
+            let id = document.getElementById("modal_id").value;
+            let vezeteknev = document.getElementById("modal_vezeteknev").value;
+            let keresztnev = document.getElementById("modal_keresztnev").value;
+            let email = document.getElementById("modal_email").value;
+            let telefonszam = document.getElementById("modal_telefonszam").value;
+            let munkakor = document.getElementById("modal_munkakor").value;
+    
+            fetch('/dolgozok/update', 
+            
+            {
+                method: "POST",
+                headers: 
+                {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id,
+                    vezeteknev: vezeteknev,
+                    keresztnev: keresztnev,
+                    email: email,
+                    telefonszam: telefonszam,
+                    munkakor: munkakor
+                })
+            })
+            .then(function(response) 
+            {
+                return response.json();
+            })
+            .then(function(data) 
+            {
+                if (data.success) 
+                {
+                    alert("Adatok sikeresen frissítve!");
+                    document.getElementById("modal").classList.add("hidden");
+                    location.reload();
+                } 
+                else 
+                {
+                    alert("Hiba történt: " + data.error);
+                }
+            })
+            .catch(function(error) 
+            {
+                console.error("Hiba:", error);
+            });
         }
+    
+        function bezaras() 
+        {
+            document.getElementById("modal").classList.add("hidden");
+        }
+
     </script>
 </body>
 </html>
