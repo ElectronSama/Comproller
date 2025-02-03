@@ -2,62 +2,31 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DolgozoController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+// Főoldal //
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/contact', function () {
-    return view('kapcsolat');
-});
+// Oldalak //
+Route::view('/contact', 'kapcsolat');
+Route::view('/profile', 'profil');
+Route::view('/dashboard', 'iranyitopult');
+Route::view('/events', 'esemenyek');
+Route::view('/worktime', 'munkaido');
+Route::view('/payroll-calculation', 'berszamfejtes');
 
-Route::get('/profile', function () {
-    return view('profil');
-});
-
-Route::get('/dashboard', function () {
-    return view('iranyitopult');
-});
-
-Route::get('/events', function () {
-    return view('esemenyek');
-});
-Route::get('/registry', function () {
-    return view('nyilvantartas');
-});
-
-Route::get('/worktime', function () {
-    return view('munkaido');
-});
-
-Route::get('/payroll-calculation', function () {
-    return view('berszamfejtes');
-});
-
-Route::post('/api/set-admin-session', function (Illuminate\Http\Request $request) 
-{
-    if ($request->admin === true) 
-    {
-        session(['isAdmin' => true]);
-    }
-    return response()->json(['message' => 'Session frissítve.']);
-});
-
-Route::post('/logout', function () 
-{
-    session()->flush();
-    return redirect('/');
-})->name('logout');
-
+// Nyilvántartás lista //
 Route::get('/registry', function () {
     $Dolgozok = DB::table('nyilvantartas')->get();
     return view('nyilvantartas', ['Dolgozok' => $Dolgozok]);
 })->name('registry.index');
 
+// Nyilvántartás új dolgozó hozzáadása //
 Route::post('/registry', function (Request $request) {
+    // Validálás
     $validatedData = $request->validate([
         'Keresztnev' => 'required|string|max:255',
         'Vezeteknev' => 'required|string|max:255',
@@ -74,21 +43,34 @@ Route::post('/registry', function (Request $request) {
         'Telefonszam' => 'required|string|max:255',
         'Munkakor' => 'required|string|max:255',
     ]);
-
+    // Adatok beszúrása
     DB::table('nyilvantartas')->insert($validatedData);
 
     return redirect()->route('registry.index')->with('success', 'Dolgozó sikeresen hozzáadva.');
 })->name('registry.store');
 
+// Irányítópult //
 Route::get('/dashboard', function () {
-
     $Dolgozok = DB::table('nyilvantartas')->get();
     $Dolgozokszama = DB::table('nyilvantartas')->count();
     return view('iranyitopult', ['Dolgozok' => $Dolgozok, 'Dolgozokszama' => $Dolgozokszama]);
 });
 
+// Dolgozók kezelése //
 Route::get('/dolgozok', [DolgozoController::class, 'index']);
-
+Route::get('/dolgozok/{id}', [DolgozoController::class, 'show']);
 Route::delete('/dolgozok/{id}', [DolgozoController::class, 'destroy'])->name('dolgozok.destroy');
 
-Route::get('/dolgozok/{id}', [DolgozoController::class, 'show']);
+// Admin jogosultság //
+Route::post('/api/set-admin-session', function (Request $request) {
+    if ($request->admin === true) {
+        session(['isAdmin' => true]);
+    }
+    return response()->json(['message' => 'Session frissítve.']);
+});
+
+// Kijelentkezés //
+Route::post('/logout', function () {
+    session()->flush();
+    return redirect('/');
+})->name('logout');
