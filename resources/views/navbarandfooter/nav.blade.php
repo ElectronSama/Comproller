@@ -4,75 +4,85 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <style>
-  .navbar {
-    background-color: #7568ff;
-    border-bottom: #9d94ff 10px solid;
-    }
-    .nav-link {
-        color: #c7d8ff;
-        font-weight: bold;
-    }
-    .nav-link:hover {
-        color: #0d214e;
-        font-weight: bold;
-        letter-spacing: 5px;
-        transition: 0.7s;
-    }
-</style>
-<nav class="navbar navbar-expand-lg justify-content-center">
-  <div class="container-fluid">
-    <div class="row w-100">
-      <div class="col text-start">
-      </div>
-      <div class="col text-center">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-          <ul class="navbar-nav">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        nav {
+            background-color: lightblue;
+            color: black;
+            font-weight: bold;
+            padding: 15px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu {
+            display: flex;
+            gap: 15px;
+        }
+        .menu a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: white;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .menu a:hover {
+            background-color: #777d7c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: lightblue;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="menu">
             @if(!session('isAdmin'))
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/">Kezdőlap</a>
-            </li>
+            <a href="#">Kezdőlap</a>
+            <a href="#">Kapcsolat</a>
             @endif
             @if(session('isAdmin'))
-            <li class="nav-item">
-              <a class="nav-link" href="/dashboard">Irányítópult</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/events">Események</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/registry">Nyilvántartás</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/worktime">Munkaidő</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/payroll-calculation">Bérszámfejtés</a>
-            </li>
+            <a href="#">Irányítópult</a>
+            <a href="#">Események</a>
+            <a href="#">Nyilvántartás</a>
+            <a href="#">Munkaidő</a>
+            <a href="#">Bérszámfejtés</a>
+            <a href="#">Profil</a>
+            <a href="#" onclick="kijelentkezes()">Kijelentkezés</a>
             @endif
-            @if(!session('isAdmin'))
-            <li class="nav-item">
-              <a class="nav-link" href="/contact">Kapcsolat</a>
-            </li>
-            @endif
-            @if(session('isAdmin'))
-            <li class="nav-item">
-              <a class="nav-link" href="/profile">Profil</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="kijelentkezes()">Kijelentkezés</a>
-            </li>
-            @endif
-          </ul>
         </div>
-      </div>
-      <div class="col text-end">
-      </div>
-    </div>
-  </div>
-</nav>
+        <img src="bagoly.jpeg" alt="Logo" class="logo">
+    </nav>
 <script>
 
   function kijelentkezes() 
