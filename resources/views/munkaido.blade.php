@@ -1,358 +1,406 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="kepek/icon.png">
     <meta charset="UTF-8">
-    <title>Comproller - Munkaidő</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
     <style>
-        .navbar {
-            background-color: #7568ff;
-            border-bottom: #9d94ff 10px solid;
-            width: 100%;
-        }
-
-        .nav-link {
-            color: #c7d8ff;
-            font-weight: bold;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-
-        .nav-link:hover {
-            color: #0d214e;
-            font-weight: bold;
-            letter-spacing: 5px;
-            transition: 0.7s;
-        }
-
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            height: 100vh;
-            margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 0px;
-            box-sizing: border-box;
+            text-align: center;
+            margin: 50px;
         }
-
-        .ora-tarto {
-            margin-top: 30px;
-            padding: 20px;
-            border: 5px solid #007BFF;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            background-color: white;
+        .clock {
+            font-size: 80px;
+            margin: 30px;
+        }
+        .box-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .box {
+            width: 400px;
+            min-height: 300px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .ora {
-            font-size: 5rem;
+            justify-content: center;
+            font-size: 28px;
             font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
         }
-
-        .gombok {
-            display: flex;
-            gap: 10px;
+        .yellow-box {
+            border-radius: 25px;
+            border: 7px solid yellow;
         }
-
-        .gombok button {
-            padding: 10px 20px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        .blue-box {
+            border-radius: 25px;
+            border: 7px solid blue;
         }
-
-        .inditas {
-            background-color: #28a745;
+        .input-group {
+            margin: 15px 0;
+            font-size: 22px;
         }
-
-        .szunet {
-            background-color: #ffc107;
+        input, select {
+            font-size: 20px;
+            padding: 8px;
+            width: 90%;
         }
-
-        .befejezes {
-            background-color: #dc3545;
+        .disabled {
+            background-color: #d3d3d3;
+            pointer-events: none;
+            opacity: 0.6; 
         }
-
-        .letiltva {
-            background-color: #ccc;
-            cursor: not-allowed;
+        .disabled-div {
+            background-color: #d3d3d3;
+            padding: 15px;
+            border-radius: 10px;
             opacity: 0.6;
         }
-
-        .nev-bemenet-tarto {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        input[disabled], select[disabled] {
+            background-color: #d3d3d3;
         }
-
-        .nev-bemenet-tarto input {
-            padding: 10px;
-            font-size: 1rem;
-            border: 2px solid #007BFF;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            width: 250px;
+        .enabled {
+            background-color: white;
+            opacity: 1;
         }
-
-        .nev-bemenet-tarto button {
-            padding: 10px 20px;
-            font-size: 1rem;
+        #name {
+            width: 60%;
+            font-size: 18px;
+        }
+        #add-button {
+            padding: 15px 30px;
+            font-size: 22px;
+            background-color: green;
+            color: white;
             border: none;
-            border-radius: 5px;
-            background-color: #007BFF;
-            color: white;
+            border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .tablazat-tarto {
-            border-radius: 25px;
-            max-height: 400px;
-            overflow-y: auto;
-            width: 100%;
-            max-width: 600px;
-            border: none; /* A táblázat összes vonalának eltávolítása */
-        }
-
-        table {
-            border-radius: 25px;
-            border-collapse: collapse;
-            width: 100%;
-            background: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
-            border: none; /* A táblázat összes vonalának eltávolítása */
         }
-
-        table tr {
-            border-bottom: 1px solid #ddd; /* Csak vízszintes vonalak megjelenítése */
+        #add-button:hover {
+            background-color: darkgreen;
         }
-
-        th, td {
-            text-align: center;
-            border: none; /* Függőleges vonalak eltávolítása */
-            padding: 10px;
+        .error-message {
+            color: red;
+            font-size: 20px;
+            margin-top: 20px;
         }
-
-        th {
-            text-align: center;
-            background-color: #007BFF;
-            color: white;
-        }
-
-
-        .szerkesztes-ikon {
-            cursor: pointer;
-            color: #007BFF;
-        }
-
-        .kiemelt {
-            background-color: #e0f7fa;
-        }
-
-        .gombok {
-            display: none;
-        }
-
-        .gombok.lathato {
-            display: flex;
-        }
-
-        footer
-        {
-            background-color:#7568ff;
-            border-top:#9d94ff 10px solid;
-            color: #c7d8ff;
-            font-weight: bold;
+        table {
             width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 12px;
             text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
         }
     </style>
 </head>
 <body>
     @include('navbarandfooter/nav')
-
-<div class="ora-tarto">
-        <div class="ora" id="ora">00:00:00</div>
-        <div class="gombok" id="gombok">
-            <button class="inditas" onclick="rogzitesInditas()" disabled>Kezdés</button>
-            <button class="szunet" onclick="rogzitesSzunet()" disabled>Szünet</button>
-            <button class="befejezes" onclick="rogzitesBefejezes()" disabled>Befejezés</button>
+    <div class="clock" id="clock">00:00:00</div>
+    <div class="box-container">
+        <div class="box yellow-box">
+            <div class="input-group">
+                <label for="date">Dátum:</label>
+                <input type="date" id="date">
+            </div>
+            <div class="input-group">
+                <label for="time">Idő:</label>
+                <input type="time" id="time">
+            </div>
+            <div class="input-group">
+                <label for="hours">Munkanap hossza:</label>
+                <select id="hours">
+                    <option value="">óra</option>
+                    <option value="4">4 óra</option>
+                    <option value="8">8 óra</option>
+                    <option value="12">12 óra</option>
+                </select>
+            </div>
         </div>
-        <div class="nev-bemenet-tarto">
-            <input type="text" id="munkasNev" placeholder="Irj be egy munkás ember nevét!">
-            <button onclick="hozzaadasATablazathoz()">Hozzadás</button>
+        <div class="box blue-box">
+            <div class="input-group disabled-div" id="no-break-div">
+                <label for="no-break">Nincs szünet:</label>
+            </div>
+            <div class="input-group break-group" id="break-group-1">
+                <label for="break-time-1">Szünet kezdete:</label>
+                <input type="time" id="break-time-1">
+            </div>
+            <div class="input-group break-group" id="break-group-2">
+                <label for="break-time-2">Szünet kezdete:</label>
+                <input type="time" id="break-time-2">
+            </div>
         </div>
     </div>
-
-    <div class="tablazat-tarto">
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Név</th>
-                    <th>Dátum</th>
-                    <th>Kezdés ideje</th>
-                    <th>Szünet ideje</th>
-                    <th>Befejezés ideje</th>
-                    <th>Szerkesztés</th>
-                </tr>
-            </thead>
-            <tbody id="tablazatTest">
-            </tbody>
-        </table>
+    
+    <div class="input-group">
+        <label for="name">Név:</label>
+        <input type="text" id="name" placeholder="Írd be a nevet">
     </div>
+    <button id="add-button">Hozzáadás a táblázathoz</button>
 
+    <div id="error-message" class="error-message"></div>
+
+    <table id="info-table">
+        <thead>
+            <tr>
+                <th>Sorszám</th>
+                <th>Dolgozó neve</th>
+                <th>Munkanap</th>
+                <th>Munka kezdete</th>
+                <th>Munka befejezése</th>
+                <th>1. Szünet kezdete</th>
+                <th>1. Szünet vége</th>
+                <th>2. Szünet kezdete</th>
+                <th>2. Szünet vége</th>
+                <th>Ledolgozott órák</th>
+                <th>Munkabér</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dinamikus sorok ide kerülnek -->
+        </tbody>
+    </table>
+    
     <script>
-        let munkasIndex = 0;
-        let aktualisMunkasSor = null;
-        let gombokAllapota = [];
-        let kezdesiIdok = [];
-
-        function frissitesOra() {
-            const oraElem = document.getElementById('ora');
-            const most = new Date();
-            const orak = String(most.getHours()).padStart(2, '0');
-            const percek = String(most.getMinutes()).padStart(2, '0');
-            const masodpercek = String(most.getSeconds()).padStart(2, '0');
-            oraElem.textContent = `${orak}:${percek}:${masodpercek}`;
+        function updateClock() {
+            let now = new Date();
+            let hours = now.getHours().toString().padStart(2, '0');
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            let seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds}`;
         }
+        setInterval(updateClock, 1000);
+        updateClock();
 
-        function hozzaadasATablazathoz() {
-            const kiemeltSorok = document.querySelectorAll('.kiemelt');
-            kiemeltSorok.forEach(sor => sor.classList.remove('kiemelt'));
+        document.addEventListener("DOMContentLoaded", function() {
+            let today = new Date();
+            let formattedDate = today.toISOString().split("T")[0];
+            document.getElementById("date").setAttribute("max", formattedDate);
 
-            const nevBemenet = document.getElementById('munkasNev');
-            const nev = nevBemenet.value.trim();
-            if (nev) {
-                munkasIndex++;
-                const tablazatBody = document.getElementById('tablazatTest');
-                const ujSor = document.createElement('tr');
-                const ma = new Date().toLocaleDateString();
+            //kék doboz
+            let breakGroup1 = document.getElementById("break-group-1");
+            let breakGroup2 = document.getElementById("break-group-2");
+            let breakTime1 = document.getElementById("break-time-1");
+            let breakTime2 = document.getElementById("break-time-2");
+            let noBreakDiv = document.getElementById("no-break-div");
 
-                ujSor.innerHTML = `
-                    <td>${munkasIndex}</td>
-                    <td>${nev}</td>
-                    <td>${ma}</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td><span class="szerkesztes-ikon" onclick="szerkesztesSor(${munkasIndex - 1})">✏️</span></td>
-                `;
-                tablazatBody.appendChild(ujSor);
-                nevBemenet.value = '';
+            // A kék doboz tiltás
+            breakGroup1.classList.add("disabled");
+            breakGroup2.classList.add("disabled");
+            breakTime1.disabled = true;
+            breakTime2.disabled = true;
+            noBreakDiv.classList.add("disabled-div");
+    });
 
-                gombokAllapota.push({inditas: false, szunet: true, befejezes: true});
-                kezdesiIdok.push(null);
 
-                gombokLathatosaga();
-                gombokAllapotBeallitas(munkasIndex - 1);
+        // Időbeállitás
+        document.getElementById("hours").addEventListener("change", function() {
+            let hours = this.value;
+            let breakGroup1 = document.getElementById("break-group-1");
+            let breakGroup2 = document.getElementById("break-group-2");
+            let breakTime1 = document.getElementById("break-time-1");
+            let breakTime2 = document.getElementById("break-time-2");
+            let noBreakDiv = document.getElementById("no-break-div");
 
-                szerkesztesSor(munkasIndex - 1);
-
-                const tablazatTarto = document.querySelector('.tablazat-tarto');
-                tablazatTarto.scrollTop = tablazatTarto.scrollHeight;
-            }
-        }
-
-        function gombokLathatosaga() {
-            const gombok = document.getElementById('gombok');
-            const tablazatBody = document.getElementById('tablazatTest');
-            if (tablazatBody.children.length > 0) {
-                gombok.classList.add('lathato');
+            if (hours == "4") {
+                // 4 órás műszak
+                breakGroup1.classList.add("disabled");
+                breakGroup2.classList.add("disabled");
+                breakTime1.disabled = true;
+                breakTime2.disabled = true;
+                noBreakDiv.classList.remove("disabled-div");
+                noBreakDiv.classList.add("enabled");
+            } else if (hours == "8") {
+                // 8 órás műszak
+                breakGroup1.classList.remove("disabled");
+                breakGroup2.classList.add("disabled");
+                breakTime1.disabled = false;
+                breakTime2.disabled = true;
+                noBreakDiv.classList.add("disabled-div");
+                noBreakDiv.classList.remove("enabled");
+            } else if (hours == "12") {
+                // 12 órás műszak
+                breakGroup1.classList.remove("disabled");
+                breakGroup2.classList.remove("disabled");
+                breakTime1.disabled = false;
+                breakTime2.disabled = false;
+                noBreakDiv.classList.add("disabled-div");
+                noBreakDiv.classList.remove("enabled");
             } else {
-                gombok.classList.remove('lathato');
+                // Ha nincs választás: minden inaktív
+                breakGroup1.classList.add("disabled");
+                breakGroup2.classList.add("disabled");
+                breakTime1.disabled = true;
+                breakTime2.disabled = true;
+                noBreakDiv.classList.add("disabled-div");
+                noBreakDiv.classList.remove("enabled");
             }
+        });
+
+        function szamolMunkaBefejezese(munkakezdete, munkaOrak) {
+            // Munkakezdés idejének felbontása
+            const [kezdoOra, kezdoPerc] = munkakezdete.split(':').map(Number);
+
+            // Munka óraszámának hozzáadása
+            let befejezesOra = kezdoOra + parseInt(munkaOrak);
+            let befejezesPerc = kezdoPerc;
+
+            // Ha 24 órán túl lenne, visszaállítjuk
+            befejezesOra = befejezesOra % 24;
+
+            // Formázott időpont létrehozása
+            const befejezesiIdo = 
+                befejezesOra.toString().padStart(2, '0') + ':' + 
+                befejezesPerc.toString().padStart(2, '0');
+
+            return befejezesiIdo;
         }
 
-        function gombokAllapotBeallitas(sorIndex) {
-            const inditasBtn = document.querySelector('.inditas');
-            const szunetBtn = document.querySelector('.szunet');
-            const befejezesBtn = document.querySelector('.befejezes');
-            const allapot = gombokAllapota[sorIndex];
+        function szamolSzunetVege(szunetKezdete) {
+            if (!szunetKezdete) return '-';
 
-            inditasBtn.disabled = allapot.inditas;
-            szunetBtn.disabled = allapot.szunet;
-            befejezesBtn.disabled = allapot.befejezes;
+            // Szünet kezdetének felbontása órákra és percekre
+            const [kezdoOra, kezdoPerc] = szunetKezdete.split(':').map(Number);
 
-            inditasBtn.classList.toggle('letiltva', allapot.inditas);
-            szunetBtn.classList.toggle('letiltva', allapot.szunet);
-            befejezesBtn.classList.toggle('letiltva', allapot.befejezes);
+            // Fél óra hozzáadása
+            let vegzoOra = kezdoOra;
+            let vegzoPerc = kezdoPerc + 30;
+
+            // Ha a percek 60 fölé mennek, óra növelése
+            if (vegzoPerc >= 60) {
+                vegzoOra++;
+                vegzoPerc -= 60;
+            }
+
+            // 24 órán túli idő kezelése
+            vegzoOra = vegzoOra % 24;
+
+            // Formázott időpont
+            const szunetVege = 
+                vegzoOra.toString().padStart(2, '0') + ':' + 
+                vegzoPerc.toString().padStart(2, '0');
+
+            return szunetVege;
         }
 
-        function rogzitesInditas() {
-            const sorIndex = aktualisMunkasSor;
-            gombokAllapota[sorIndex] = {inditas: true, szunet: false, befejezes: false};
-            gombokAllapotBeallitas(sorIndex);
+        function ellenorizSzunetIdot(munkakezdete, szunetKezdete) {
+            if (!szunetKezdete) return true;
 
-            const most = new Date();
-            const kezdesiIdo = most.toLocaleTimeString();
-            kezdesiIdok[sorIndex] = kezdesiIdo;
+            // Munkakezdés és szünet idejének felbontása
+            const [munkakezdOra, munkakezdPerc] = munkakezdete.split(':').map(Number);
+            const [szunetKezdOra, szunetKezdPerc] = szunetKezdete.split(':').map(Number);
 
-            const sorok = document.querySelectorAll('tr');
-            sorok[sorIndex + 1].cells[3].textContent = kezdesiIdo;
+            // Teljes percben kifejezve a kezdési idő
+            const munkakezdPercek = munkakezdOra * 60 + munkakezdPerc;
+            const szunetKezdPercek = szunetKezdOra * 60 + szunetKezdPerc;
+
+            // Szünet ellenőrzés
+            return szunetKezdPercek > munkakezdPercek;
         }
 
-        function rogzitesSzunet() {
-            const sorIndex = aktualisMunkasSor;
-            gombokAllapota[sorIndex] = {inditas: true, szunet: true, befejezes: false};
-            gombokAllapotBeallitas(sorIndex);
 
-            const most = new Date();
-            const szunetIdo = most.toLocaleTimeString();
+        document.getElementById("add-button").addEventListener("click", function() {
+            let today = new Date();
+            let formattedDate = today.toISOString().split("T")[0]; // A mai nap dátuma
+            let minDate = today.getFullYear() < 2025 ? formattedDate : "2025-01-01";
+            let maxDate = "2025-12-31";
 
-            const sorok = document.querySelectorAll('tr');
-            sorok[sorIndex + 1].cells[4].textContent = szunetIdo;
-        }
+            let dateInput = document.getElementById("date");
+            dateInput.setAttribute("min", minDate);
+            dateInput.setAttribute("max", maxDate);
 
-        function rogzitesBefejezes() {
-            const sorIndex = aktualisMunkasSor;
-            gombokAllapota[sorIndex] = {inditas: true, szunet: true, befejezes: true};
-            gombokAllapotBeallitas(sorIndex);
+            const dolgozoNeve = document.getElementById("name").value;
+            const munkaNapja = document.getElementById("date").value;
+            const munkakezdete = document.getElementById("time").value;
+            const munkaOrak = document.getElementById("hours").value;
+            
+            const elsoSzunetKezdete = document.getElementById("break-time-1").value;
+            const masodikSzunetKezdete = document.getElementById("break-time-2").value;
 
-            const most = new Date();
-            const befejezesIdo = most.toLocaleTimeString();
+            const hibaUzenet = document.getElementById("error-message");
+            hibaUzenet.textContent = "";
 
-            const sorok = document.querySelectorAll('tr');
-            sorok[sorIndex + 1].cells[5].textContent = befejezesIdo;
-        }
+            if (!munkaNapja) {
+                hibaUzenet.textContent = "Hiba: A dátum megadása kötelező!";
+                return;
+            }
 
-        function szerkesztesSor(sorIndex) {
-            const sorok = document.querySelectorAll('tr');
-            sorok.forEach((sor, index) => {
-                if (index === sorIndex + 1) {
-                    sor.classList.add('kiemelt');
-                } else {
-                    sor.classList.remove('kiemelt');
-                }
-            });
+            if (new Date(munkaNapja) < new Date("2025-01-01")) {
+                hibaUzenet.textContent = "Hiba: Csak 2025-ös dátumok adhatók meg!";
+                return;
+            }
 
-            aktualisMunkasSor = sorIndex;
-            gombokAllapotBeallitas(sorIndex);
-        }
+            if (new Date(munkaNapja) > new Date()) {
+                hibaUzenet.textContent = "Hiba: A dátum nem lehet a jövőben!";
+                return;
+            }
 
-        setInterval(frissitesOra, 1000);
+            if (elsoSzunetKezdete && !ellenorizSzunetIdot(munkakezdete, elsoSzunetKezdete)) {
+                hibaUzenet.textContent = "Hiba: Az első szünet kezdete nem lehet korábbi, mint a munka kezdete!";
+                return;
+            }
+
+            if (masodikSzunetKezdete && !ellenorizSzunetIdot(munkakezdete, masodikSzunetKezdete)) {
+                hibaUzenet.textContent = "Hiba: A második szünet kezdete nem lehet korábbi, mint a munka kezdete!";
+                return;
+            }
+
+            const oraberMerteke = 2000;
+            const teljesOrabér = munkaOrak * oraberMerteke;
+            const munkaBefejezese = szamolMunkaBefejezese(munkakezdete, munkaOrak);
+            const elsoSzunetVege = szamolSzunetVege(elsoSzunetKezdete);
+            const masodikSzunetVege = szamolSzunetVege(masodikSzunetKezdete);
+
+            if (dolgozoNeve && munkaNapja && munkakezdete && munkaOrak) {
+                const tabla = document.getElementById("info-table").getElementsByTagName('tbody')[0];
+                const sorSzama = tabla.rows.length + 1;
+                const ujSor = tabla.insertRow();
+                ujSor.innerHTML = `
+                    <td>${sorSzama}</td>
+                    <td>${dolgozoNeve}</td>
+                    <td>${munkaNapja}</td>
+                    <td>${munkakezdete}</td>
+                    <td>${munkaBefejezese}</td>
+                    <td>${elsoSzunetKezdete || '-'}</td>
+                    <td>${elsoSzunetVege}</td>
+                    <td>${masodikSzunetKezdete || '-'}</td>
+                    <td>${masodikSzunetVege}</td>
+                    <td>${munkaOrak} óra</td>
+                    <td>${teljesOrabér} Ft</td>
+                `;
+
+                // Input mezők törlése
+                document.getElementById("name").value = "";
+                document.getElementById("date").value = "";
+                document.getElementById("time").value = "";
+                document.getElementById("hours").value = "";
+                document.getElementById("break-time-1").value = "";
+                document.getElementById("break-time-2").value = "";
+
+                let breakGroup1 = document.getElementById("break-group-1");
+                let breakGroup2 = document.getElementById("break-group-2");
+                let breakTime1 = document.getElementById("break-time-1");
+                let breakTime2 = document.getElementById("break-time-2");
+                let noBreakDiv = document.getElementById("no-break-div");
+
+                breakGroup1.classList.add("disabled");
+                breakGroup2.classList.add("disabled");
+                breakTime1.disabled = true;
+                breakTime2.disabled = true;
+                noBreakDiv.classList.add("disabled-div");
+            } else {
+                hibaUzenet.textContent = "Hiba: Kérjük, töltsd ki az összes mezőt!";
+            }
+        });
     </script>
-
     @include('navbarandfooter/footer')
 </body>
 </html>
