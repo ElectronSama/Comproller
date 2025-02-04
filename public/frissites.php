@@ -44,3 +44,9 @@ else
     echo json_encode(["success" => false, "error" => "Hozzáférés megtagadva."]);
 }
 ?>
+
+<script>
+
+    window.close();
+
+</script>
