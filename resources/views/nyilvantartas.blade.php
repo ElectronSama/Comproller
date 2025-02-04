@@ -265,7 +265,7 @@
         </div>
 
         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-            <form action="feltoltes.php" method="POST">
+            <form action="feltoltes.php" method="POST" target="_blank">
                 @csrf
                 <div class="row m-5">
                     <div class="col-md-6 mb-3">
@@ -376,9 +376,9 @@
                     </div>
                 </div>
                 <div class="m-5 p-1">
-                    <button type="submit" class="btn btn-primary">Mentés</button>
+                    <button type="submit" class="btn btn-primary"  onclick="oldal_frissites()">Mentés</button>
                 </div>
-            </form>
+            </form >
         </div>
     </div>
     @include('navbarandfooter/footer')
@@ -425,6 +425,8 @@
             {
                 console.error("Hiba történt a törlés során:", error);
             });
+
+            window.location.href = '/registry'
         }
     
         function lekeres(id) 
@@ -499,7 +501,7 @@
                 {
                     alert("Adatok sikeresen frissítve!");
                     document.getElementById("modal").classList.add("hidden");
-                    location.reload();
+                    window.location.href = '/registry';
                 } 
                 else 
                 {
@@ -515,6 +517,13 @@
         function bezaras() 
         {
             document.getElementById("modal").classList.add("hidden");
+        }
+
+        function oldal_frissites()
+        {
+
+            window.location.href = '/registry';
+
         }
 
     </script>

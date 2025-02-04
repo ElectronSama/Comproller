@@ -476,7 +476,7 @@
         function oldal_frissites()
         {
 
-            location.reload();
+            window.location.href = '/events';
 
         }
 
