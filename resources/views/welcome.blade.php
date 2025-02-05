@@ -219,11 +219,11 @@
         const passwordField = document.getElementById(passwordId);
         if (megnyomva === false) {
             passwordField.type = 'text';
-            iconElement.src = 'szem_ki.png';
+            iconElement.src = "{{ asset('kepek/szem_ki.png') }}";
             megnyomva = true;
         } else {
             passwordField.type = 'password';
-            iconElement.src = 'szem_be.png';
+            iconElement.src = "{{ asset('kepek/szem_be.png') }}";
             megnyomva = false;
         }
     }
