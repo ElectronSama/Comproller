@@ -68,20 +68,20 @@
     <nav>
         <div class="menu">
             @if(!session('isAdmin'))
-            <a href="#">Kezdőlap</a>
-            <a href="#">Kapcsolat</a>
+            <a href="/">Kezdőlap</a>
+            <a href="/contact">Kapcsolat</a>
             @endif
             @if(session('isAdmin'))
-            <a href="#">Irányítópult</a>
-            <a href="#">Események</a>
-            <a href="#">Nyilvántartás</a>
-            <a href="#">Munkaidő</a>
-            <a href="#">Bérszámfejtés</a>
-            <a href="#">Profil</a>
+            <a href="/dashboard">Irányítópult</a>
+            <a href="/events">Események</a>
+            <a href="/registry">Nyilvántartás</a>
+            <a href="/worktime">Munkaidő</a>
+            <a href="/payroll-calculation">Bérszámfejtés</a>
+            <a href="/profile">Profil</a>
             <a href="#" onclick="kijelentkezes()">Kijelentkezés</a>
             @endif
         </div>
-        <img src="bagoly.jpeg" alt="Logo" class="logo">
+        <img src="kepek/logo.svg" alt="Logo" class="logo">
     </nav>
 <script>
 
