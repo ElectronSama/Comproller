@@ -242,96 +242,77 @@
     });
         
         function bejelentkezes() 
+    {
+        let felhasznalok = [];
+        let jelszavak = [];
+        let szerepek = [];
+
+        let adat = <?php echo json_encode($data); ?>;
+        adat.forEach(function(user) 
         {
+            felhasznalok.push(user.felhasznalonev);
+            jelszavak.push(user.jelszo);
+            szerepek.push(user.szerep);
+        });
 
-            let felhasznalok = [];
-            let jelszavak = [];
-            let szerepek = [];
+        let felhasznalonev = document.getElementById("b_nev").value;
+        let jelszo = document.getElementById("password-signin").value;
 
-            let adat = <?php echo json_encode($data); ?>;
-            adat.forEach(function(user) 
+        let ervenyes = false;
+        let admin = false;
+
+        for (let i = 0; i < felhasznalok.length; i++)
+        {
+            if (felhasznalok[i] == felhasznalonev && jelszavak[i] == jelszo)
             {
-                felhasznalok.push(user.felhasznalonev);
-                jelszavak.push(user.jelszo);
-                szerepek.push(user.szerep);
-            });
-
-            let felhasznalonev = document.getElementById("b_nev").value;
-            let jelszo = document.getElementById("password-signin").value;
-
-            let ervenyes = false;
-            let admin = false;
-
-            for (let i = 0; i < felhasznalok.length; i++)
-            {
-
-                if (felhasznalok[i] == felhasznalonev && jelszavak[i] == jelszo)
+                ervenyes = true;
+                if (szerepek[i] == "hr" || szerepek[i] == "pu" || szerepek[i] == "admin")
                 {
-
-                    ervenyes = true;
-
-                    if (szerepek[i] == "hr" || szerepek[i] == "pu" || szerepek[i] == "admin")
-                    {
-
-                        admin = true;
-                        
-                    }
-                    
+                    admin = true;
                 }
-                else
-                {
-
-                    continue;
-
-                }
-
             }
-
-            if (ervenyes == true)
-            {
-
-                    if (admin == true)
-                    {                   
-
-                        if (admin) 
-                        {
-                            fetch('/api/set-admin-session', 
-                            {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                                },
-                                body: JSON.stringify({ admin: true })
-                            })
-                            .then(function(response) 
-                            {
-                                if (response.ok) 
-                                {
-                                    window.location.href = '/dashboard';
-                                } 
-                                else 
-                                {
-                                    alert("Hiba történt a jogosultság frissítése közben.");
-                                }
-                            })
-                            .catch(function(error) 
-                            {
-                                console.error('Hiba:', error);
-                            });
-                        }
-
-                    }
-                
-            }
-            else
-            {
-
-                alert("Érvénytelen adatok!");
-
-            }
-
         }
+
+        if (ervenyes == true)
+        {
+            if (admin == true)
+            {                   
+                fetch('/api/set-admin-session', 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({ admin: true })
+                })
+                .then(function(response) 
+                {
+                    if (response.ok) 
+                    {
+                        window.location.href = '/dashboard';
+                    } 
+                    else 
+                    {
+                        alert("Hiba történt a jogosultság frissítése közben.");
+                    }
+                })
+                .catch(function(error) 
+                {
+                    console.error('Hiba:', error);
+                });
+            }
+        }
+        else
+        {
+            alert("Érvénytelen adatok!");
+        }
+
+        // *** Input mezők törlése minden esetben ***
+        document.getElementById("b_nev").value = "";
+        document.getElementById("password-signin").value = "";
+    }
+
 
 
     </script>
