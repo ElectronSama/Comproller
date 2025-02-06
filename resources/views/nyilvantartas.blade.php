@@ -7,6 +7,21 @@
     <title>Comproller - Nyilvántartás</title>
     <style>
 
+        #a_form
+        {
+
+            padding : 50px;
+
+        }
+
+        #regisztralas_gomb
+        {
+
+            margin-bottom: 30px;
+            margin-left: 150px;
+
+        }
+
         .nyilvantartas_tarolo
         {
             padding: 20px;
@@ -265,121 +280,96 @@
         </div>
 
         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-            <form action="feltoltes.php" method="POST" target="_blank">
-                @csrf
-                <div class="row m-5">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Keresztnév</label>
-                        <input type="text" name="keresztnev_input" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Vezetéknév</label>
-                        <input type="text" name="vezeteknev_input" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Születési dátum</label>
-                        <input type="date" name="datum_input" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Anyja neve</label>
-                        <input type="text" name="anyu_input" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">TAJ szám</label>
-                        <input type="text" name="tajszam_input" class="form-control" required pattern="[0-9]{9}" title="A TAJ számnak pontosan 9 számjegyből kell állnia.">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Adószám</label>
-                        <input type="text" name="adoszam_input" class="form-control" required pattern="[0-9]{8}-[0-9]{1}-[0-9]{2}" title="Az adószám formátuma: 12345678-1-12">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Bankszámlaszám</label>
-                        <input type="text" name="szamla_input" class="form-control">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Cím</label>
-                        <input type="text" name="cim_input" class="form-control" required>
-                        <div class="form-check mt-2">
-                            <input class="form-check-input" type="checkbox" id="ugyanazCim" onchange="copyAddress()">
-                            <label class="form-check-label" for="ugyanazCim">
-                                Megegyezik a tartózkodási hely a címmel
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Állampolgárság</label>
-                        <select name="allam_input" class="form-control" required>
-                            <option value="magyar">Magyar</option>
-                            <option value="román">Román</option>
-                            <option value="szlovák">Szlovák</option>
-                            <option value="osztrák">Osztrák</option>
-                            <option value="horvát">Horvát</option>
-                            <option value="szerb">Szerb</option>
-                            <option value="szlovén">Szlovén</option>
-                            <option value="ukrán">Ukrán</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Tartózkodási hely</label>
-                        <input type="text" name="tartozkodas_input" class="form-control" id="tartozkodasiHely" required>
-                    </div>
-                    <script>
-                        function copyAddress() {
-                            const checkbox = document.getElementById('ugyanazCim');
-                            const tartozkodasiHely = document.getElementById('tartozkodasiHely');
-                            const cim = document.getElementsByName('cim_input')[0];
-                            
-                            if (checkbox.checked) {
-                                tartozkodasiHely.value = cim.value;
-                                tartozkodasiHely.disabled = true;
-                                
-                                cim.addEventListener('input', function() {
-                                    tartozkodasiHely.value = cim.value;
-                                });
-                            } else {
-                                tartozkodasiHely.disabled = false;
-                                cim.removeEventListener('input', function() {
-                                    tartozkodasiHely.value = cim.value;
-                                });
-                            }
-                        }
-                    </script>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Személyi igazolvány szám</label>
-                        <input type="text" name="szemelyi_input" class="form-control" required pattern="[0-9]{11}" title="A személyi számnak pontosan 11 számjegyből kell állnia.">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" name="email_input" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Telefonszám</label>
-                        <div class="input-group">
-                            <select class="form-select" name="CountryCode" style="max-width: 120px;">
-                                <option value="+36">+36 (HU)</option>
-                                <option value="+40">+40 (RO)</option>
-                                <option value="+421">+421 (SK)</option>
-                                <option value="+43">+43 (AT)</option>
-                                <option value="+385">+385 (HR)</option>
-                                <option value="+381">+381 (RS)</option>
-                                <option value="+386">+386 (SI)</option>
-                                <option value="+380">+380 (UA)</option>
-                            </select>
-                            <input type="tel" name="telefon_input" class="form-control" required 
-                                   pattern="[0-9]{9}" title="Kérem adjon meg 9 számjegyet">
-                        </div>
-                        <small class="form-text text-muted">Példa: 301234567</small>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Munkakör</label>
-                        <input type="text" name="munkakor_input" class="form-control" required>
-                    </div>
+
+
+        <div class="container mt-5">
+    <form action="/registry" method="POST" target="_blank" id="a_form">
+        @csrf
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="Keresztnev">Keresztnév</label>
+                    <input type="text" class="form-control" id="Keresztnev" name="Keresztnev" placeholder="Pl. (János)" required maxlength="255">
+                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
                 </div>
-                <div class="m-5 p-1">
-                    <button type="submit" class="btn btn-primary"  onclick="oldal_frissites()">Mentés</button>
+                <div class="form-group mb-3">
+                    <label for="Vezeteknev">Vezetéknév</label>
+                    <input type="text" class="form-control" id="Vezeteknev" name="Vezeteknev" placeholder="Pl. (Hunyodi)" required maxlength="255">
+                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
                 </div>
-            </form >
+                <div class="form-group mb-3">
+                    <label for="Szuletesi_datum">Születési dátum</label>
+                    <input type="date" class="form-control" id="Szuletesi_datum" name="Szuletesi_datum" min="1900-01-01" max="2026-01-01" required>
+                    <small class="form-text text-muted">Kötelező.</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Anyja_neve">Anyja neve</label>
+                    <input type="text" class="form-control" id="Anyja_neve" name="Anyja_neve" placeholder="Pl. (Tóth Zsuzsanna)" required maxlength="255">
+                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Tajszam">TAJ szám</label>
+                    <input type="text" class="form-control" id="Tajszam" name="Tajszam" placeholder="Pl. (123456789) Kötőjel nélkül!" required pattern="[0-9]{9}">
+                    <small class="form-text text-muted">Kötelező.</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Adoszam">Adószám</label>
+                    <input type="text" class="form-control" id="Adoszam" name="Adoszam" placeholder="Pl. (1234567890)" required pattern="[0-9]{8}-[0-9]{1}-[0-9]{2}">
+                    <small class="form-text text-muted">Kötelező.</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Bankszamlaszam">Bankszámlaszám</label>
+                    <input type="text" class="form-control" id="Bankszamlaszam" name="Bankszamlaszam" placeholder="Pl. (123456781234567812345678) vagy (1234567812345678)" maxlength="24" required>
+                    <small class="form-text text-muted">Kötelező.</small>
+                </div>
+                    <button type="submit" class="btn btn-primary col-5" id="regisztralas_gomb">Regisztráció</button>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="Cim">Cím</label>
+                    <input type="text" class="form-control" id="Cim" name="Cim" placeholder="Pl. (Petőfi út 1.)" required maxlength="255">
+                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Allampolgarsag">Állampolgárság</label>
+                    <input type="text" class="form-control" id="Allampolgarsag" name="Allampolgarsag" placeholder="Pl. (magyar)" required maxlength="255">
+                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Tartozkodasi_hely">Tartózkodási hely</label>
+                    <input type="text" class="form-control" id="Tartozkodasi_hely" name="Tartozkodasi_hely" placeholder="Pl. (1234 Valami, Petőfi út 1.)" maxlength="255">
+                    <small class="form-text text-muted">Maximum 255 karakter.</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Szemelyigazolvany_szam">Személyigazolvány szám</label>
+                    <input type="text" class="form-control" id="Szemelyigazolvany_szam" name="Szemelyigazolvany_szam" placeholder="Pl. (123456FF)" required pattern="^\d{6}[A-Z]{2}$">
+                    <small class="form-text text-muted">Kötelező.</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Email">Email</label>
+                    <input type="email" class="form-control" id="Email" name="Email" placeholder="Pl. (pelda@pelda.hu)" required maxlength="255">
+                    <small class="form-text text-muted">Kötelező.</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Telefonszam">Telefonszám</label>
+                    <input type="text" class="form-control" id="Telefonszam" name="Telefonszam" placeholder="Pl. (+36301234567)" required maxlength="11">
+                    <small class="form-text text-muted">Kötelező.</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Munkakor">Munkakör</label>
+                    <input type="text" class="form-control" id="Munkakor" name="Munkakor" placeholder="Pl. (Búrkoló aszisztens)"  required maxlength="255">
+                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Megjegyzes">Megjegyzés</label>
+                    <input type="text" class="form-control" id="Megjegyzes" name="Megjegyzes" placeholder="Pl. (Példa megjegyzés.)" maxlength="255">
+                    <small class="form-text text-muted">Maximum 255 karakter.</small>
+                </div>
+            </div>
         </div>
+    </form>
+</div>
+
     </div>
     @include('navbarandfooter/footer')
     <script>
