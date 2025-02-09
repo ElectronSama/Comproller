@@ -1,12 +1,13 @@
 <style>
     footer {
         background-color: lightblue;
-        color: black;
         font-weight: bold;
-        text-align: center;
-        padding: 10px;
         width: 100%;
-    }
+        text-align: center;
+        color: #fff;
+        padding: 10px 0;
+        margin-top: auto;
+        }
 </style>
     <footer>
         <h3>Comproller 2024/2025</h3>

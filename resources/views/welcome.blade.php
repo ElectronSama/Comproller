@@ -27,32 +27,6 @@
             flex-direction: column;
         }
 
-        .navbar 
-        {
-            width: 100%;
-            background-color: #7568ff;
-            border-bottom: #9d94ff 10px solid;
-        }
-
-        .navbar-nav 
-        {
-            margin-left: 0;
-        }
-
-        .navbar .nav-link 
-        {
-            color: #c7d8ff;
-            font-weight: bold;
-        }
-
-        .navbar .nav-link:hover 
-        {
-            color: #0d214e;
-            font-weight: bold;
-            letter-spacing: 5px;
-            transition: 0.7s;
-        }
-
         .wrapper 
         {
             position: relative;
@@ -138,15 +112,7 @@
             background-color: rgb(222, 230, 233);
         }
 
-        footer 
-        {
-            width: 100%;
-            background-color: #7568ff;
-            text-align: center;
-            color: #fff;
-            padding: 10px 0;
-            margin-top: auto;
-        }
+
         
     </style>
 </head>
