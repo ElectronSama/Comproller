@@ -14,14 +14,6 @@
 
         }
 
-        #regisztralas_gomb
-        {
-
-            margin-bottom: 30px;
-            margin-left: 150px;
-
-        }
-
         .nyilvantartas_tarolo
         {
             padding: 20px;
@@ -216,6 +208,10 @@
             display: none;
         }
 
+        .terkozutana 
+        {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -283,93 +279,170 @@
 
 
         <div class="container mt-5">
-    <form action="/registry" method="POST" target="_blank" id="a_form">
-        @csrf
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group mb-3">
-                    <label for="Keresztnev">Keresztnév</label>
-                    <input type="text" class="form-control" id="Keresztnev" name="Keresztnev" placeholder="Pl. (János)" required maxlength="255">
-                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Vezeteknev">Vezetéknév</label>
-                    <input type="text" class="form-control" id="Vezeteknev" name="Vezeteknev" placeholder="Pl. (Hunyodi)" required maxlength="255">
-                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Szuletesi_datum">Születési dátum</label>
-                    <input type="date" class="form-control" id="Szuletesi_datum" name="Szuletesi_datum" min="1900-01-01" max="2026-01-01" required>
-                    <small class="form-text text-muted">Kötelező.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Anyja_neve">Anyja neve</label>
-                    <input type="text" class="form-control" id="Anyja_neve" name="Anyja_neve" placeholder="Pl. (Tóth Zsuzsanna)" required maxlength="255">
-                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Tajszam">TAJ szám</label>
-                    <input type="text" class="form-control" id="Tajszam" name="Tajszam" placeholder="Pl. (123456789) Kötőjel nélkül!" required pattern="[0-9]{9}">
-                    <small class="form-text text-muted">Kötelező.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Adoszam">Adószám</label>
-                    <input type="text" class="form-control" id="Adoszam" name="Adoszam" placeholder="Pl. (1234567890)" required pattern="[0-9]{8}-[0-9]{1}-[0-9]{2}">
-                    <small class="form-text text-muted">Kötelező.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Bankszamlaszam">Bankszámlaszám</label>
-                    <input type="text" class="form-control" id="Bankszamlaszam" name="Bankszamlaszam" placeholder="Pl. (123456781234567812345678) vagy (1234567812345678)" maxlength="24" required>
-                    <small class="form-text text-muted">Kötelező.</small>
-                </div>
-                    <button type="submit" class="btn btn-primary col-5" id="regisztralas_gomb">Regisztráció</button>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group mb-3">
-                    <label for="Cim">Cím</label>
-                    <input type="text" class="form-control" id="Cim" name="Cim" placeholder="Pl. (Petőfi út 1.)" required maxlength="255">
-                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Allampolgarsag">Állampolgárság</label>
-                    <input type="text" class="form-control" id="Allampolgarsag" name="Allampolgarsag" placeholder="Pl. (magyar)" required maxlength="255">
-                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Tartozkodasi_hely">Tartózkodási hely</label>
-                    <input type="text" class="form-control" id="Tartozkodasi_hely" name="Tartozkodasi_hely" placeholder="Pl. (1234 Valami, Petőfi út 1.)" maxlength="255">
-                    <small class="form-text text-muted">Maximum 255 karakter.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Szemelyigazolvany_szam">Személyigazolvány szám</label>
-                    <input type="text" class="form-control" id="Szemelyigazolvany_szam" name="Szemelyigazolvany_szam" placeholder="Pl. (123456FF)" required pattern="^\d{6}[A-Z]{2}$">
-                    <small class="form-text text-muted">Kötelező.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Email">Email</label>
-                    <input type="email" class="form-control" id="Email" name="Email" placeholder="Pl. (pelda@pelda.hu)" required maxlength="255">
-                    <small class="form-text text-muted">Kötelező.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Telefonszam">Telefonszám</label>
-                    <input type="text" class="form-control" id="Telefonszam" name="Telefonszam" placeholder="Pl. (+36301234567)" required maxlength="11">
-                    <small class="form-text text-muted">Kötelező.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Munkakor">Munkakör</label>
-                    <input type="text" class="form-control" id="Munkakor" name="Munkakor" placeholder="Pl. (Búrkoló aszisztens)"  required maxlength="255">
-                    <small class="form-text text-muted">Kötelező, maximum 255 karakter.</small>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="Megjegyzes">Megjegyzés</label>
-                    <input type="text" class="form-control" id="Megjegyzes" name="Megjegyzes" placeholder="Pl. (Példa megjegyzés.)" maxlength="255">
-                    <small class="form-text text-muted">Maximum 255 karakter.</small>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 
+            <form id="employeeForm" method="POST" action="{{ route('registry.store') }}">
+                @csrf
+                <div class="row g-3">
+                    <!-- Keresztnév, Vezetéknév, Születési Dátum -->
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Keresztnev" name="Keresztnev" placeholder="" required maxlength="255">
+                            <label for="Keresztnev">Keresztnév</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Vezeteknev" name="Vezeteknev" placeholder="" required maxlength="255">
+                            <label for="Vezeteknev">Vezetéknév</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Nem" name="Nem" placeholder="" required maxlength="255">
+                            <label for="Nem">Nem</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="Szuletesi_datum" name="Szuletesi_datum" min="1900-01-01" max="2026-01-01" required>
+                            <label for="Szuletesi_datum">Születési dátum</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Szuletesi_hely" name="Szuletesi_hely" placeholder="" required>
+                            <label for="Szuletesi_datum">Születési hely</label>
+                        </div>
+                    </div>
+
+                    <!-- Anyja neve, TAJ szám, Adószám -->
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Anyja_neve" name="Anyja_neve" placeholder="" required maxlength="255">
+                            <label for="Anyja_neve">Anyja neve</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Tajszam" name="Tajszam" placeholder="" pattern="\d{9}" required>
+                            <label for="Tajszam">Társadalombiztosítási Azonosító Jel</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Adoszam" name="Adoszam" placeholder="" pattern="\d{10}" required>
+                            <label for="Adoszam">Adóazonosító</label>
+                        </div>
+                    </div>
+
+                    <!-- Bankszámlaszám, Email, Alapórabér -->
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Bankszamlaszam" name="Bankszamlaszam" placeholder="" required maxlength="24">
+                            <label for="Bankszamlaszam">Bankszámlaszám</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="Email" name="Email" placeholder="" required maxlength="255">
+                            <label for="Email">Email</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="Alaporaber" name="Alaporaber" placeholder="" required min="0" step="0.01">
+                            <label for="Alaporaber">Alapórabér</label>
+                        </div>
+                    </div>
+
+                    <!-- Telefonszám nemzetközi -->
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" id="Telefon" name="Telefon" placeholder="" required>
+                            <label for="Telefon">Telefonszám</label>
+                        </div>
+                    </div>
+
+                    <!-- Irányítószám, Település, Utca/Út -->
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Irsz" name="Irsz" placeholder="" required maxlength="4">
+                            <label for="Irsz">Irányítószám</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Telepules" name="Telepules" placeholder="" required maxlength="255">
+                            <label for="Telepules">Település</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Utca_ut" name="Utca_ut" placeholder="" required maxlength="255">
+                            <label for="Utca_ut">Utca/Út</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Tartozkodasi_hely" name="Tartozkodasi_hely" placeholder="" required maxlength="255">
+                            <label for="Tartozkodasi_hely">Tartózkodási hely</label>
+                        </div>
+                    </div>
+
+                    <!-- Házszám, Állampolgárság, Műszak -->
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Hazszam" name="Hazszam" placeholder="" required maxlength="10">
+                            <label for="Hazszam">Házszám</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="Allampolgarsag" name="Allampolgarsag" required>
+                                <option value="" disabled selected>Válasszon...</option>
+                                <option value="magyar">Magyar</option>
+                                <option value="angol">Angol</option>
+                                <option value="német">Német</option>
+                            </select>
+                            <label for="Allampolgarsag">Állampolgárság</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="Muszak" name="Muszak" required>
+                                <option value="" disabled selected>Válasszon...</option>
+                                <option value="reggeli">Reggeli műszak</option>
+                                <option value="deli">Déli műszak</option>
+                                <option value="esti">Esti műszak</option>
+                            </select>
+                            <label for="Muszak">Műszak</label>
+                        </div>
+                    </div>
+
+                    <!-- Munkakör -->
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="Munkakor" name="Munkakor" placeholder="" required maxlength="255">
+                            <label for="Munkakor">Munkakör</label>
+                        </div>
+                    </div>
+
+                    <!-- Megjegyzés -->
+                    <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" id="Megjegyzes" name="Megjegyzes" placeholder="" style="height: 100px;"></textarea>
+                            <label for="Megjegyzes">Megjegyzés</label>
+                        </div>
+                    </div>
+
+                    <!-- Submit gomb -->
+                    <div class="terkozutana text-start col-12">
+                        <button type="submit" class="btn btn-primary btn-lg">Regisztráció</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>      
     </div>
     @include('navbarandfooter/footer')
     <script>

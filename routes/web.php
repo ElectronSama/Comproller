@@ -19,35 +19,16 @@ Route::view('/worktime', 'munkaido');
 Route::view('/payroll-calculation', 'berszamfejtes');
 
 // Nyilvántartás lista //
-Route::get('/registry', function () {
-    $Dolgozok = DB::table('nyilvantartas')->get();
-    return view('nyilvantartas', ['Dolgozok' => $Dolgozok]);
-})->name('registry.index');
+Route::get('/registry', [DolgozoController::class, 'index'])->name('registry.index');
 
-// Nyilvántartás új dolgozó hozzáadása //
-Route::post('/registry', function (Request $request) {
+// Új dolgozó hozzáadása //
+Route::post('/registry', [DolgozoController::class, 'store'])->name('registry.store');
 
-    $validatedData = $request->validate([
-        'Keresztnev' => 'required|string|max:255',
-        'Vezeteknev' => 'required|string|max:255',
-        'Szuletesi_datum' => 'required|date',
-        'Anyja_neve' => 'required|string|max:255',
-        'Tajszam' => 'required|string|max:255',
-        'Adoszam' => 'required|string|max:255',
-        'Bankszamlaszam' => 'nullable|string|max:255',
-        'Cim' => 'required|string|max:255',
-        'Allampolgarsag' => 'required|string|max:255',
-        'Tartozkodasi_hely' => 'nullable|string|max:255',
-        'Szemelyigazolvany_szam' => 'required|string|max:255',
-        'Email' => 'required|email|max:255',
-        'Telefonszam' => 'required|string|max:255',
-        'Munkakor' => 'required|string|max:255',
-    ]);
+// Dolgozó adatainak frissítése //
+Route::put('/dolgozok/update', [DolgozoController::class, 'update'])->name('dolgozok.update');
 
-    DB::table('nyilvantartas')->insert($validatedData);
-
-    return redirect()->route('registry.index')->with('success', 'Dolgozó sikeresen hozzáadva.');
-})->name('registry.store');
+// Dolgozó törlése //
+Route::delete('/dolgozok/{id}', [DolgozoController::class, 'destroy'])->name('dolgozok.destroy');
 
 // Irányítópult //
 Route::get('/dashboard', function () {
@@ -56,12 +37,7 @@ Route::get('/dashboard', function () {
     return view('iranyitopult', ['Dolgozok' => $Dolgozok, 'Dolgozokszama' => $Dolgozokszama]);
 });
 
-// Dolgozók kezelése //
-Route::get('/dolgozok', [DolgozoController::class, 'index']);
-Route::get('/dolgozok/{id}', [DolgozoController::class, 'show']);
-Route::delete('/dolgozok/{id}', [DolgozoController::class, 'destroy'])->name('dolgozok.destroy');
-
-// Admin jogosultság //
+// Admin jogosultság beállítása //
 Route::post('/api/set-admin-session', function (Request $request) {
     if ($request->admin === true) {
         session(['isAdmin' => true]);
@@ -74,5 +50,3 @@ Route::post('/logout', function () {
     session()->flush();
     return redirect('/');
 })->name('logout');
-
-Route::post('/dolgozok/update', [DolgozoController::class, 'update']);

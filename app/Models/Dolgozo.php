@@ -12,9 +12,10 @@ class Dolgozo extends Model
     protected $table = 'nyilvantartas';
     protected $primaryKey = 'DolgozoID';
     protected $fillable = [
-        'Keresztnev', 'Vezeteknev', 'Szuletesi_datum', 'Anyja_neve', 'Tajszam', 'Adoszam', 
-        'Bankszamlaszam', 'Cim', 'Allampolgarsag', 'Tartozkodasi_hely', 'Szemelyigazolvany_szam', 
-        'Email', 'Telefonszam', 'Munkakor'
+        'Keresztnev', 'Vezeteknev', 'Nem', 'Szuletesi_datum', 'Szuletesi_hely', 
+        'Anyja_neve', 'Tajszam', 'Adoszam', 'Bankszamlaszam', 'Email', 'Telefonszam', 
+        'Alaporaber', 'Irsz', 'Telepules', 'Utca_ut', 'Hazszam', 'Allampolgarsag', 
+        'Tartozkodasi_hely', 'Muszak', 'Munkakor', 'Megjegyzes'
     ];
     public $timestamps = true;
 }

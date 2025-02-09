@@ -9,22 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('felhasznalok', function (Blueprint $table) {
+        Schema::create('ber', function (Blueprint $table) {
             $table->id();
-            $table->string('felhasznalonev')->unique();
-            $table->string('jelszo');
-            $table->string('szerep')->unique();
+            $table->foreignId('DolgozoID');
+            $table->integer('Beremeles');
             $table->timestamps();
         });
-    }    
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('comprollerfelhasznalok');
+        Schema::dropIfExists('ber');
     }
 };
