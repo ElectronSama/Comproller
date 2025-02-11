@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dolgozo;
+use Illuminate\Support\Facades\DB;
 
 class DolgozoController extends Controller
 {
@@ -58,18 +59,12 @@ class DolgozoController extends Controller
         return response()->json(['success' => true]);
     } 
 
-}
-
-class DolgozoController extends Controller
-{
-    // Nyilvántartás listázása
     public function index()
     {
         $Dolgozok = DB::table('nyilvantartas')->get();
         return view('nyilvantartas', ['Dolgozok' => $Dolgozok]);
     }
 
-    // Új dolgozó hozzáadása
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -96,7 +91,6 @@ class DolgozoController extends Controller
             'Megjegyzes' => 'nullable|string|max:255',
         ]);
 
-        // Alapértelmezett értékek beállítása, ha nincs megadva
         $validatedData['Bankszamlaszam'] = $validatedData['Bankszamlaszam'] ?? '';
         $validatedData['Megjegyzes'] = $validatedData['Megjegyzes'] ?? '';
 
@@ -105,8 +99,7 @@ class DolgozoController extends Controller
         return redirect()->route('registry.index')->with('success', 'Dolgozó sikeresen hozzáadva.');
     }
 
-    // Dolgozó adatainak frissítése
-    public function update(Request $request)
+    public function updateRegistry(Request $request)
     {
         $validatedData = $request->validate([
             'DolgozoID' => 'required|integer|exists:nyilvantartas,DolgozoID',
@@ -140,8 +133,7 @@ class DolgozoController extends Controller
         return redirect()->route('registry.index')->with('success', 'Dolgozó adatai frissítve.');
     }
 
-    // Dolgozó törlése
-    public function destroy($id)
+    public function destroyRegistry($id)
     {
         DB::table('nyilvantartas')->where('DolgozoID', $id)->delete();
         return redirect()->route('registry.index')->with('success', 'Dolgozó sikeresen törölve.');
