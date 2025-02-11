@@ -156,51 +156,53 @@
 </head>
 <body>
     @include('navbarandfooter/nav')
-    <div class="clock" id="clock">00:00:00</div>
-    <div class="box-container">
-        <div class="box yellow-box">
-            <div class="input-group">
-                <label for="date">Dátum:</label>
-                <input type="date" id="date">
+    <form action="mfeltoltes.php" method="POST" target="_blank" id="a_form">
+        <div class="clock" id="clock">00:00:00</div>
+        <div class="box-container">
+            <div class="box yellow-box">
+                <div class="input-group">
+                    <label for="date">Dátum:</label>
+                    <input type="date" id="date" name="idopont_input">
+                </div>
+                <div class="input-group">
+                    <label for="time">Idő:</label>
+                    <input type="time" id="time" name="idopont_ido">
+                </div>
+                <div class="input-group">
+                    <label for="hours">Munkanap hossza:</label>
+                    <select id="hours" name="leiras_input">
+                        <option value="">óra</option>
+                        <option value="4">4 óra</option>
+                        <option value="8">8 óra</option>
+                        <option value="12">12 óra</option>
+                    </select>
+                </div>
             </div>
-            <div class="input-group">
-                <label for="time">Idő:</label>
-                <input type="time" id="time">
-            </div>
-            <div class="input-group">
-                <label for="hours">Munkanap hossza:</label>
-                <select id="hours">
-                    <option value="">óra</option>
-                    <option value="4">4 óra</option>
-                    <option value="8">8 óra</option>
-                    <option value="12">12 óra</option>
-                </select>
+            <div class="box blue-box">
+                <div class="input-group disabled-div" id="no-break-div">
+                    <label for="no-break">Nincs szünet:</label>
+                </div>
+                <div class="input-group break-group" id="break-group-1">
+                    <label for="break-time-1">Szünet kezdete:</label>
+                    <input type="time" id="break-time-1" name="break_time_1">
+                </div>
+                <div class="input-group break-group" id="break-group-2">
+                    <label for="break-time-2">Szünet kezdete:</label>
+                    <input type="time" id="break-time-2" name="break_time_2">
+                </div>
             </div>
         </div>
-        <div class="box blue-box">
-            <div class="input-group disabled-div" id="no-break-div">
-                <label for="no-break">Nincs szünet:</label>
-            </div>
-            <div class="input-group break-group" id="break-group-1">
-                <label for="break-time-1">Szünet kezdete:</label>
-                <input type="time" id="break-time-1">
-            </div>
-            <div class="input-group break-group" id="break-group-2">
-                <label for="break-time-2">Szünet kezdete:</label>
-                <input type="time" id="break-time-2">
-            </div>
-        </div>
-    </div>
     
-    <div class="input-group">
-        <label for="name">Név:</label>
-        <input type="text" id="name" placeholder="Írd be a nevet">
-    </div>
-    <div class="button-container">
-        <button id="add-button">Hozzáadás a táblázathoz</button>
-    </div>
-
-    <div id="error-message" class="error-message"></div>
+        <div class="input-group">
+            <label for="name">Név:</label>
+            <input type="text" id="name" name="muszak_input" placeholder="Írd be a nevet">
+        </div>
+        <div class="button-container">
+            <button type="submit" id="add-button">Hozzáadás a táblázathoz</button>
+        </div>
+    
+        <div id="error-message" class="error-message"></div>
+    </form>    
 
     <table id="info-table">
         <thead>
@@ -432,13 +434,13 @@
                     <td>${teljesOrabér} Ft</td>
                 `;
 
-                // Input mezők törlése
-                document.getElementById("name").value = "";
-                document.getElementById("date").value = "";
-                document.getElementById("time").value = "";
-                document.getElementById("hours").value = "";
-                document.getElementById("break-time-1").value = "";
-                document.getElementById("break-time-2").value = "";
+                setTimeout(function() {
+                    let mezok = ["name", "date", "time", "hours", "break-time-1", "break-time-2"];
+                    mezok.forEach(function(i) 
+                    {
+                        document.getElementById(i).value = "";
+                    });
+                }, 1000);
 
                 let breakGroup1 = document.getElementById("break-group-1");
                 let breakGroup2 = document.getElementById("break-group-2");
