@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2025 at 07:40 PM
+-- Generation Time: Feb 11, 2025 at 09:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -149,11 +149,20 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `muszakok` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `leiras` varchar(255) NOT NULL,
+  `oraszam` varchar(255) NOT NULL,
   `muszaknev` varchar(255) NOT NULL,
+  `idopont` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `muszakok`
+--
+
+INSERT INTO `muszakok` (`id`, `oraszam`, `muszaknev`, `idopont`, `created_at`, `updated_at`) VALUES
+(1, '4', 'aaa', '2025-02-11 10:10:00', NULL, NULL),
+(2, '12', 'bbb', '2025-02-10 10:15:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -187,8 +196,7 @@ CREATE TABLE `nyilvantartas` (
 --
 
 INSERT INTO `nyilvantartas` (`DolgozoID`, `Keresztnev`, `Vezeteknev`, `Szuletesi_datum`, `Anyja_neve`, `Tajszam`, `Adoszam`, `Bankszamlaszam`, `Cim`, `Allampolgarsag`, `Tartozkodasi_hely`, `Szemelyigazolvany_szam`, `Email`, `Telefonszam`, `Munkakor`, `Megjegyzés`, `created_at`, `updated_at`) VALUES
-(1, 'Péter', 'Kovács', '1995.03.05', 'Virág Lili', '867 530 912', '32155599-2-10', '20018054-00000000-11711034', 'Budapest, Rákóczi u., 1192', 'magyar', 'Budapest', '2-111111-5555', 'peter33@gmail.com', '06703335677', 'hr', '', NULL, NULL),
-(2, 'Leander', 'Bán', '1991.06.02', 'Molnár Zoé', '233 540 411', '88832391-2-10', '30021555-00000000-12811130', 'Budapest, Gyáli út 50, 1097', 'magyar', 'Budapest', '2-222222-4444', 'ban11@gmail.com', '06301115678', 'pu', '', NULL, NULL);
+(1, 'Péter', 'Kovács', '1995.03.05', 'Virág Lili', '867 530 912', '32155599-2-10', '20018054-00000000-11711034', 'Budapest, Rákóczi u., 1192', 'magyar', 'Budapest', '2-111111-5555', 'peter33@gmail.com', '06703335677', 'hr', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -210,7 +218,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('1bkyQiwM9nuRvPicLboL8YWYXUAJ1IzMIuWwvP0H', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0', 'YTozOntzOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjY6Il90b2tlbiI7czo0MDoibmVSam1nek1XVHVDdXBnSmZsNXh5VlhTa01jYWRqaFhyRGhKWXNNciI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fX0=', 1738089611);
+('Nf0ZjPoDBwIaps2hr1Hydp44k28j2nib45ApyEs6', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:135.0) Gecko/20100101 Firefox/135.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNFc1bHY0R3NJQjQzMWZxdXJlcHBQOGtDRTEzckZDQ2gwT1dLaExBdSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9yZWdpc3RyeSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NzoiaXNBZG1pbiI7YjoxO30=', 1739296385),
+('QwW0bpV9x8KTCRIlSTuh1vgD7m0gZSzKF0stgf2s', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoieFdnNDU2d3pWU2trWnVCcVgwMk85bTdoS3RmWnYwcFdhM01JanozSyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9yZWdpc3RyeSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NzoiaXNBZG1pbiI7YjoxO30=', 1739298298),
+('YRn5Fd7Ki2tLXG9bKaH3onOH81jerFTAji6kY0Ki', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:135.0) Gecko/20100101 Firefox/135.0', 'YTo0OntzOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjY6Il90b2tlbiI7czo0MDoiMTZvTlBpenpIb2pjZXc4OGk4UDJtbzRYZ1pkVms0dHRVYkpSenBVVyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC93b3JrdGltZSI7fXM6NzoiaXNBZG1pbiI7YjoxO30=', 1739305059);
 
 --
 -- Indexes for dumped tables
@@ -312,7 +322,7 @@ ALTER TABLE `dolgozok`
 -- AUTO_INCREMENT for table `esemenyek`
 --
 ALTER TABLE `esemenyek`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `felhasznalok`
@@ -330,13 +340,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `muszakok`
 --
 ALTER TABLE `muszakok`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nyilvantartas`
 --
 ALTER TABLE `nyilvantartas`
-  MODIFY `DolgozoID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `DolgozoID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
