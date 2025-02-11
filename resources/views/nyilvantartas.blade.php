@@ -306,7 +306,7 @@
 
 
         <div class="container mt-5">
-    <form action="/registry" method="POST" target="_blank" id="a_form">
+    <form action="/registry" method="POST" id="a_form">
         @csrf
         <div class="row">
             <div class="col-md-6">
@@ -424,22 +424,36 @@
             })
             .then(function(data) 
             {
+
                 if (data.success) 
                 {
                     console.log("Dolgozó törölve:", id);
-                    document.getElementById("sor_" + id).remove();
+                    let elem = document.getElementById("sor_" + id);
+                    if (elem) 
+                    {
+                        elem.remove();
+                    } 
+                    else 
+                    {
+                        console.error("Nem található a törlendő elem:", "sor_" + id);
+                    }
+
+                    setTimeout(function() 
+                    {
+                        window.location.href = '/registry';
+                    }, 500);
                 } 
                 else 
                 {
                     alert(data.message);
                 }
+
             })
             .catch(function(error) 
             {
                 console.error("Hiba történt a törlés során:", error);
             });
 
-            window.location.href = '/registry'
         }
     
         function lekeres(id) 
